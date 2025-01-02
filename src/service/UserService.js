@@ -1,7 +1,6 @@
 
 
-import {createAsyncThunk} from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import $api, { API_URL } from "../http/index.js";
 
 class UserService {
@@ -15,7 +14,7 @@ class UserService {
                 .then((response) => {
                     data.data = response.data;
                     data.status = response.status;
-                }).catch((err)=>{
+                }).catch((err) => {
                     data.data = err.response.data;
                     data.status = err.response.status;
                 })
@@ -32,7 +31,7 @@ class UserService {
                 .then((response) => {
                     data.data = response.data.user;
                     data.status = response.status;
-                }).catch((err)=>{
+                }).catch((err) => {
                     data = null;
                 })
             return data;
@@ -40,20 +39,24 @@ class UserService {
     );
 
     // Checked
-    static userLogout (){
+    static userLogout() {
         localStorage.clear();
     }
 
-    // Working
+    // Checked
     static userRegister = createAsyncThunk(
-        'users/register',
+        'user/register',
         async (user_data) => {
-            let data = null;
-            await $api.post('/users/register', user_data)
+            let data = {};
+            await $api.post('/user/register', user_data)
                 .then((response) => {
-                    data = response.data;
-                }).catch((err)=>{
-                    data = null;
+                    console.log(response);
+                    data.data = response.data;
+                    data.status = response.status;
+                }).catch((err) => {
+                    console.log(err);
+                    data.data = err.response.data;
+                    data.status = err.response.status;
                 })
             return data;
         }

@@ -83,6 +83,23 @@ export const loginRegisterSlice = createSlice({
         })
 
 
+        //..............................................................................................User Refresh
+        // Checked
+        builder.addCase(UserService.userRegister.pending, (state, action) => {
+            state.login_pending = true;
+        })
+        builder.addCase(UserService.userRegister.fulfilled, (state, action) => {
+            state.login_pending = false;
+            if (action.payload.status == 201) {
+                state.login_message = 'User registered successfully';
+                state.is_login_error = 1;
+            }
+            else {
+                state.login_message = action.payload.data.message;
+                state.is_login_error = 0;
+            }
+        })
+
     }
 })
 
