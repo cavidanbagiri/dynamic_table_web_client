@@ -1,10 +1,16 @@
 
 import React from 'react'
+import MyTablesComponents from '../components/home/MyTablesComponents';
+import PublicTablesComponent from '../components/home/PublicTablesComponent';
 
 function Home() {
     return (
-        <div className="bg-red-500 flex flex-col">
-            <h1>Home</h1>
+        <div className=" flex flex-col items-start p-2">
+
+            <MyTablesComponents />
+
+            <PublicTablesComponent />
+     
         </div>
     );
 }
