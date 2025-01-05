@@ -24,9 +24,6 @@ function App() {
     if(is_auth === false){
       dispatch(UserService.refresh());
     }
-    if(is_auth){
-        console.log('use effect work for is auth in navbar');
-    }
   },
 );
 

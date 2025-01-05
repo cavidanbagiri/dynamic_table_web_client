@@ -13,7 +13,8 @@ const initialState = {
     public_tables: [],
     favorite_tables: [],
     front_message: '',
-    show_message: -1
+    show_message: -1,
+    table_pending: false
 }
 
 export const tableSlice = createSlice({
@@ -31,14 +32,22 @@ export const tableSlice = createSlice({
         
 
         // Show Public tables
+        builder.addCase(TableService.getPublicTables.pending, (state, action) => {
+            state.table_pending = true
+        })
         builder.addCase(TableService.getPublicTables.fulfilled, (state, action) => {
             state.public_tables = action.payload.data;
+            state.table_pending = false
         })
         
 
         // Fetch Favorite tables
+        builder.addCase(TableService.fetchFavoriteTables.pending, (state, action) => {
+            state.table_pending = true
+        })
         builder.addCase(TableService.fetchFavoriteTables.fulfilled, (state, action) => {
             state.favorite_tables = action.payload.data;
+            state.table_pending = false
         })
 
         // Add to favorites

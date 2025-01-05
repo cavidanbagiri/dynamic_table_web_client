@@ -1,15 +1,17 @@
 import React from 'react';
-
-import { Link } from 'react-router-dom';
-
 import { useState, useEffect } from 'react';
+
+
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { setLoginErrorInitial } from '../store/login_register_store';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 import UserService from '../service/UserService';
+
+import { setLoginErrorInitial } from '../store/login_register_store';
 
 import MessageBox from '../components/common/MessageBox';
 
@@ -20,6 +22,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const is_login_error = useSelector((state) => state.loginRegisterSlice.is_login_error);
+    const login_pending = useSelector((state) => state.loginRegisterSlice.login_pending);
     const login_message = useSelector((state) => state.loginRegisterSlice.login_message);
 
     const [email, setEmail] = useState('');
@@ -88,12 +91,20 @@ const Login = () => {
                     />
                 </div>
 
-                <button
-                    onClick={login}
-                    className="bg-blue-500 text-white p-2 rounded w-full hover:bg-blue-600 transition duration-200"
-                >
-                    Login
-                </button>
+                {
+                    !login_pending ?
+                        <button
+                            onClick={login}
+                            className="bg-blue-500 text-white p-2 rounded w-full hover:bg-blue-600 transition duration-200"
+                        >
+                            Login
+                        </button>
+                        :
+                        <Box className="flex justify-center" sx={{ display: 'flex' }}>
+                            <CircularProgress />
+                        </Box>
+                }
+
 
                 <p className="mt-4 text-center text-gray-600">
                     Don't have an account? <Link to="/register" className="text-blue-500 hover:underline">Sign up</Link>

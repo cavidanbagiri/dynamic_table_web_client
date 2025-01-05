@@ -1,5 +1,5 @@
 
-1 - Front - User login pending need to fix - Stopped
+1 - Front - User login pending need to fix - Ready
 
 2 - Back - Need To fetch all public tables and show in frontend - Ready
 
@@ -17,5 +17,6 @@
 
 9 - Back - Need to show public tables which not available inside of favrites - Ready
 
-9 - Front - Show load spinner during fething of tables - Working on
+10 - Front - Show load spinner during fething of tables - Ready
 
+11 - Back - Front - Add Created date in all models - Stopped

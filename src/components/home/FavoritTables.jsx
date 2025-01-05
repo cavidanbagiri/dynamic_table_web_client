@@ -9,6 +9,7 @@ import TableService from '../../service/TableService';
 
 import FavoriteIconComponent from '../common/FavoriteIconComponent';
 import MessageBox from '../common/MessageBox';
+import TableSkeleton from '../common/TableSkeleton';
 
 
 export default function FavoritTables() {
@@ -18,6 +19,7 @@ export default function FavoritTables() {
     const show_message = useSelector((state) => state.tableSlice.show_message);
     const favorite_tables = useSelector((state) => state.tableSlice.favorite_tables);
     const front_message = useSelector((state) => state.tableSlice.front_message);
+    const table_pending = useSelector((state) => state.tableSlice.table_pending);
 
     const is_auth = useSelector((state) => state.loginRegisterSlice.is_auth);
 
@@ -52,6 +54,8 @@ export default function FavoritTables() {
 
                     <h1 className='text-2xl font-medium text-start my-6'>Favorite Tables</h1>
 
+                    {
+                        !table_pending === true ?
                     <table>
 
                         <thead>
@@ -79,6 +83,10 @@ export default function FavoritTables() {
                         </tbody>
 
                     </table>
+                    :
+                    <TableSkeleton />
+                    }
+
                 </div>
             }
 
