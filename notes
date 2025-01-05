@@ -1,3 +1,21 @@
+
 1 - Front - User login pending need to fix - Stopped
 
-2 - Back - Need To fetch all public tables and show in frontend - Working
+2 - Back - Need To fetch all public tables and show in frontend - Ready
+
+3 - Back - Add Favorites tables section in favorites model - Ready
+
+4 - Today - Front - If is auth add favorit will work, otherwise he user will go to login page - Ready
+
+5 - Today - Front - Need to fetch all favorites tables and show in frontend - Ready
+
+6 - Today - Back - Delete favorites table - Ready
+
+7 - Need To delete or add favorites in real time - Ready
+
+8 - Need to show error message in frontend if this is not in favorites - Ready
+
+9 - Back - Need to show public tables which not available inside of favrites - Ready
+
+9 - Front - Show load spinner during fething of tables - Working on
+
