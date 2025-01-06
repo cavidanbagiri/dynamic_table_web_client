@@ -19,4 +19,8 @@
 
 10 - Front - Show load spinner during fething of tables - Ready
 
-11 - Back - Front - Add Created date in all models - Stopped
+11 - Back - Front - Add Created date in all models - Ready
+
+12 - Show Table name in frontend without underscore - Ready
+
+13 - Show Favorites tables as just name in frontend - Ready

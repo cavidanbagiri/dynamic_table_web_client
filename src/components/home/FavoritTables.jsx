@@ -55,36 +55,19 @@ export default function FavoritTables() {
                     <h1 className='text-2xl font-medium text-start my-6'>Favorite Tables</h1>
 
                     {
-                        !table_pending === true ?
-                    <table>
-
-                        <thead>
-                            <tr className='bg-gray-200 text-sm'>
-                                <th className='border border-white w-24 p-2'>Fv</th>
-                                <th className='border border-white w-24 p-2'>S.No</th>
-                                <th className='border border-white w-96'>Table Name</th>
-                                <th className='border border-white'>Description</th>
-                                <th className='border border-white w-64'>Created By</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {
+                        table_pending === true ?
+                            <TableSkeleton /> :
+                            favorite_tables.length === 0 ?
+                                <span className='text-md mt-2 text-gray-500'>
+                                    There is no favorite tables
+                                </span>
+                                :
                                 favorite_tables.map((table, index) => (
-                                    <tr key={index} className='bg-white text-sm hover:bg-gray-100'>
-                                        <td className='border border-white p-2 w-24 flex items-center justify-center'><FavoriteIconComponent rule='delete' table_id={table.id} /></td>
-                                        <td className='border border-white p-2 w-24 '>{index + 1}</td>
-                                        <td className='border border-white p-2 w-96 '>{table.table_name}</td>
-                                        <td className='border border-white p-2 '>{table.table_description}</td>
-                                        <td className='border border-white p-2 w-64 '>{table.username}</td>
-                                    </tr>
+                                    <div className='flex items-center w-full py-2 px-3 ' key={index}>
+                                        <FavoriteIconComponent table_id={table.id} rule={'delete'} />
+                                        <span className='text-md ml-2'>{table.table_name}</span>
+                                    </div>
                                 ))
-                            }
-                        </tbody>
-
-                    </table>
-                    :
-                    <TableSkeleton />
                     }
 
                 </div>

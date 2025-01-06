@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import TableService from '../../service/TableService';
 import FavoriteIconComponent from '../common/FavoriteIconComponent';
 import TableSkeleton from '../common/TableSkeleton';
+import moment from 'moment';
 
 function PublicTablesComponent() {
 
@@ -14,7 +15,6 @@ function PublicTablesComponent() {
 
     useEffect(() => {
         const user_id = localStorage.getItem('id');
-        console.log(typeof user_id);
         dispatch(TableService.getPublicTables(user_id));
     }, []);
 
@@ -35,6 +35,7 @@ function PublicTablesComponent() {
                                 <th className='border border-white w-24 p-2'>S.No</th>
                                 <th className='border border-white w-96'>Table Name</th>
                                 <th className='border border-white'>Description</th>
+                                <th className='border border-white'>Created Date</th>
                                 <th className='border border-white w-64'>Created By</th>
                             </tr>
                         </thead>
@@ -52,6 +53,7 @@ function PublicTablesComponent() {
                                             <td className='border border-white p-2'>{index + 1}</td>
                                             <td className='border border-white p-2'>{table.table_name}</td>
                                             <td className='border border-white p-2'>{table.table_description}</td>
+                                            <td className='border border-white p-2'>{moment(table.created_at).format('YYYY-MM-DD')}</td>
                                             <td className='border border-white p-2'>{table.username}</td>
                                         </tr>
                                     )

@@ -15,6 +15,7 @@ class TableService {
             let data = {};
             await $api.get(`/table/fetchpublictables${query}`)
             .then((response) => {
+                console.log('object is ', response);
                 data.data = response.data;
                 data.status = response.status;
             }).catch((err) => {
@@ -32,7 +33,6 @@ class TableService {
             let data = {};
             await $api.get('/table/fetchfavoritetables')
                 .then((response) => {
-                    console.log('fetch favorites is working and result is ', response);
                     data.data = response.data;
                     data.status = response.status;
                 }).catch((err) => {
