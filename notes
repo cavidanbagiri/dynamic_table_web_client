@@ -1,26 +1,6 @@
 
-1 - Front - User login pending need to fix - Ready
+1 - Front - Create table design - Ready
 
-2 - Back - Need To fetch all public tables and show in frontend - Ready
+1.1 - Need To show, how many percent of data is ready - Working on
 
-3 - Back - Add Favorites tables section in favorites model - Ready
-
-4 - Today - Front - If is auth add favorit will work, otherwise he user will go to login page - Ready
-
-5 - Today - Front - Need to fetch all favorites tables and show in frontend - Ready
-
-6 - Today - Back - Delete favorites table - Ready
-
-7 - Need To delete or add favorites in real time - Ready
-
-8 - Need to show error message in frontend if this is not in favorites - Ready
-
-9 - Back - Need to show public tables which not available inside of favrites - Ready
-
-10 - Front - Show load spinner during fething of tables - Ready
-
-11 - Back - Front - Add Created date in all models - Ready
-
-12 - Show Table name in frontend without underscore - Ready
-
-13 - Show Favorites tables as just name in frontend - Ready
+2 - Bug* - Front - after adding table in favorites, table name show as lowercase , after refresh table name show as uppercase - Not fixed

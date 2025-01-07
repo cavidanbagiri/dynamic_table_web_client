@@ -65,7 +65,7 @@ export default function FavoritTables() {
                                 favorite_tables.map((table, index) => (
                                     <div className='flex items-center w-full py-2 px-3 ' key={index}>
                                         <FavoriteIconComponent table_id={table.id} rule={'delete'} />
-                                        <span className='text-md ml-2'>{table.table_name}</span>
+                                        <span className='text-md ml-2'>{table.table_name.replace('_', ' ')}</span>
                                     </div>
                                 ))
                     }

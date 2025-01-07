@@ -14,7 +14,11 @@ const initialState = {
     favorite_tables: [],
     front_message: '',
     show_message: -1,
-    table_pending: false
+    table_pending: false,
+    table_created:{
+        pending: false,
+        message: '',
+    }
 }
 
 export const tableSlice = createSlice({
@@ -76,10 +80,30 @@ export const tableSlice = createSlice({
                 state.front_message = action.payload.data.message;
                 state.show_message = 0;
             }
-
         })
-    
-    
+        
+
+        // Create table
+        builder.addCase(TableService.createTable.pending, (state, action) => {
+            state.table_created.pending = true;
+        })
+        builder.addCase(TableService.createTable.fulfilled, (state, action) => {
+            console.log('action payload is ', action.payload);
+            if(action.payload.status == 201){
+                state.table_created.message = 'Table created successfully';
+                state.table_created.pending = false;
+                state.show_message = 1;
+            }
+            else{
+                state.table_created.message = action.payload.data.detail;
+                state.table_created.pending = false;
+                state.show_message = 0;
+            }
+        })
+
+
+
+        
     }
 })
 

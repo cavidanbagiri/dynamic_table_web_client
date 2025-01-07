@@ -61,7 +61,7 @@ class TableService {
         }
     )
 
-    // Not ready for testing
+    // Checked
     static deleteFromFavorites = createAsyncThunk(
         'table/deletefromfavorites/:table_id',
         async (table_id) => {
@@ -71,6 +71,25 @@ class TableService {
                     data.data = response.data;
                     data.status = response.status;
                 }).catch((err) => {
+                    data.data = err.response.data;
+                    data.status = err.response.status;
+                })
+            return data;
+        }
+    )
+
+    // Working on
+    static createTable = createAsyncThunk(
+        'table/createtable',
+        async (formData) => {
+            let data = {};
+            await $api.post('/table/createtable', formData)
+                .then((response) => {
+                    console.log('coming response is ', response);
+                    data.data = response.data;
+                    data.status = response.status;
+                }).catch((err) => {
+                    console.log('coming error is ', err);
                     data.data = err.response.data;
                     data.status = err.response.status;
                 })

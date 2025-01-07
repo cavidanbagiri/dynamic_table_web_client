@@ -7,6 +7,7 @@ import Table from "../pages/Table.jsx";
 import Navbar from "../pages/Navbar.jsx";
 import Profile from "../pages/Profile.jsx";
 import Register from "../pages/Register.jsx";
+import CreateTable from "../pages/CreateTable.jsx"; 
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />,
+            },
+            {
+                path: "/createTable",
+                element: <CreateTable />,
             },
         ]
     }
