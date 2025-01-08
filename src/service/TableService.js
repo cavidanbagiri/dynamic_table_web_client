@@ -78,7 +78,7 @@ class TableService {
         }
     )
 
-    // Working on
+    // Checked
     static createTable = createAsyncThunk(
         'table/createtable',
         async (formData) => {
@@ -97,7 +97,24 @@ class TableService {
         }
     )
 
-
+    // Working on
+    static fetchTableByName = createAsyncThunk(
+        'table/fetch/:table_name',
+        async (table_name) => {
+            let data = {};
+            await $api.get(`/table/fetch/${table_name}`)
+                .then((response) => {
+                    console.log('coming response is ', response);
+                    data.data = response.data;
+                    data.status = response.status;
+                }).catch((err) => {
+                    console.log('coming error is ', err);
+                    data.data = err.response.data;
+                    data.status = err.response.status;
+                })
+            return data;
+        }
+    )
 
 }
 

@@ -11,10 +11,13 @@ import FavoriteIconComponent from '../common/FavoriteIconComponent';
 import MessageBox from '../common/MessageBox';
 import TableSkeleton from '../common/TableSkeleton';
 
+import { useNavigate } from 'react-router-dom';
 
 export default function FavoritTables() {
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const show_message = useSelector((state) => state.tableSlice.show_message);
     const favorite_tables = useSelector((state) => state.tableSlice.favorite_tables);
@@ -65,7 +68,10 @@ export default function FavoritTables() {
                                 favorite_tables.map((table, index) => (
                                     <div className='flex items-center w-full py-2 px-3 ' key={index}>
                                         <FavoriteIconComponent table_id={table.id} rule={'delete'} />
-                                        <span className='text-md ml-2'>{table.table_name.replace('_', ' ')}</span>
+
+                                        <span onClick={() => navigate(`/table/${table.original_table_name}`)} className='text-md ml-2'>
+                                            {table.table_name.replace('_', ' ')}
+                                        </span>
                                     </div>
                                 ))
                     }

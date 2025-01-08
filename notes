@@ -1,6 +1,29 @@
 
+Front
+
 1 - Front - Create table design - Ready
 
-1.1 - Need To show, how many percent of data is ready - Working on
+    1.1 - Need To show, how many percent of data is ready - Stopped
 
-2 - Bug* - Front - after adding table in favorites, table name show as lowercase , after refresh table name show as uppercase - Not fixed
+2 - Show Table headers and datas in frontend - Working on
+    1.1 - Show table headers
+    1.2 - Add data filter under table headers
+    1.3 - Show table data
+
+
+
+
+
+Back
+
+
+
+
+
+Bugs
+
+2 - Bug* - Front - after adding table in favorites, table name show as lowercase , after refresh table name show as uppercase - Fixed
+
+3 - Bug* - Back - after adding some table as favorites, l cant see same table as public in another user - Fixed
+
+4 - Bug* - Back - after select some tables as favorites, without refreshing, l cant fetch table - Fixed

@@ -25,6 +25,10 @@ const router = createBrowserRouter([
                 element: <Table />,
             },
             {
+                path: "/table/:tablename",
+                element: <Table />,
+            },
+            {
                 path: "/profile",
                 element: <Profile />,
             },
