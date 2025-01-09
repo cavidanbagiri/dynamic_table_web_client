@@ -9,7 +9,7 @@ function TableBodyComponent(props) {
                 {
                     props.table_info.map((row, rowIndex) => (
                         <tr key={rowIndex} className='text-sm'>
-                            <td className='border border-gray-200 p-2'>
+                            <td className='border border-gray-200 p-2 text-xs'>
                                 {rowIndex + 1}
                             </td>
                             {
@@ -18,7 +18,7 @@ function TableBodyComponent(props) {
                                         return null; 
                                     }
                                     return (
-                                        <td key={cellIndex} className='border border-gray-200 p-2'>
+                                        <td key={cellIndex} className='border border-gray-200 p-2 text-xs'>
                                             {row[key]}
                                         </td>
                                     );
