@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux';
 import TableService from '../service/TableService';
+import TableHeaderComponent from '../components/table/TableHeaderComponent';
+import TableBodyComponent from '../components/table/TableBodyComponent';
 
 function Table() {
 
@@ -14,19 +16,24 @@ function Table() {
 
   const dispatch = useDispatch();
 
+  const table_info = useSelector((state) => state.tableSlice.table_info);
+
   useEffect(() => {
     if(tablename){
-      console.log(tablename);
       dispatch(TableService.fetchTableByName(tablename));
-    }
-    else{
-      console.log('no table name');
     }
   }, []);
 
   return (
-    <div className='w-screen h-screen bg-green-500'>
-        {tablename}
+    <div className='flex flex-col'>
+        {
+            tablename && table_info?
+            <table className='w-full'>
+              <TableHeaderComponent table_info={table_info} />
+              <TableBodyComponent table_info={table_info} />
+            </table>
+            :null
+        }
     </div>
   )
 }

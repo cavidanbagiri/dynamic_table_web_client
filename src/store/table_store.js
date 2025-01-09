@@ -9,16 +9,17 @@ import TableService from "../service/TableService.js"
 
 
 const initialState = {
-    my_tables: [],
-    public_tables: [],
-    favorite_tables: [],
-    front_message: '',
-    show_message: -1,
-    table_pending: false,
-    table_created:{
+    my_tables: [], // My created tables
+    public_tables: [], // Public tables
+    favorite_tables: [], // Favorite tables
+    front_message: '', // Frontend message
+    show_message: -1, // Show message
+    table_pending: false, // Table pending
+    table_created:{ // Table created
         pending: false,
         message: '',
-    }
+    },
+    table_info: [],
 }
 
 export const tableSlice = createSlice({
@@ -88,7 +89,6 @@ export const tableSlice = createSlice({
             state.table_created.pending = true;
         })
         builder.addCase(TableService.createTable.fulfilled, (state, action) => {
-            console.log('action payload is ', action.payload);
             if(action.payload.status == 201){
                 state.table_created.message = 'Table created successfully';
                 state.table_created.pending = false;
@@ -102,8 +102,18 @@ export const tableSlice = createSlice({
         })
 
 
-
+        // Fetch Table by name
+        builder.addCase(TableService.fetchTableByName.fulfilled, (state, action) => {
+            if(action.payload.status == 200){
+                state.table_info = action.payload.data;
+                console.log('object is ', state.table_info);
+            }
+            else{
+                state.table_info = [];
+            }
+        })
         
+
     }
 })
 

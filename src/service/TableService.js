@@ -15,7 +15,6 @@ class TableService {
             let data = {};
             await $api.get(`/table/fetchpublictables${query}`)
             .then((response) => {
-                console.log('object is ', response);
                 data.data = response.data;
                 data.status = response.status;
             }).catch((err) => {
@@ -85,11 +84,9 @@ class TableService {
             let data = {};
             await $api.post('/table/createtable', formData)
                 .then((response) => {
-                    console.log('coming response is ', response);
                     data.data = response.data;
                     data.status = response.status;
                 }).catch((err) => {
-                    console.log('coming error is ', err);
                     data.data = err.response.data;
                     data.status = err.response.status;
                 })
