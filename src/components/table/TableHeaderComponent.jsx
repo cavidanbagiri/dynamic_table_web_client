@@ -1,8 +1,12 @@
 
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { updateFilterHeaderQuery } from '../../store/table_store';
 
 function TableHeaderComponent() {
+
+    const dispatch = useDispatch();
 
     const fetch_table = useSelector(state => state.tableSlice.fetch_table);
 
@@ -43,7 +47,9 @@ function TableHeaderComponent() {
                             }
                             return (
                                 <th key={header} className='border border-white w-24 p-2'>
-                                    <input type="text" 
+                                    <input type="text" onChange={(event) => { 
+                                        dispatch(updateFilterHeaderQuery({key: header, value: event.target.value}));
+                                    }}
                                     placeholder={`Search ${header}`} className="w-full text-center font-medium" />
                                 </th>
                             );

@@ -94,7 +94,7 @@ class TableService {
         }
     )
 
-    // Working on
+    // Checked
     static fetchTableByName = createAsyncThunk(
         'table/fetch/:table_name',
         async (table_name) => {
@@ -104,6 +104,26 @@ class TableService {
                     data.data = response.data;
                     data.status = response.status;
                 }).catch((err) => {
+                    data.data = err.response.data;
+                    data.status = err.response.status;
+                })
+            return data;
+        }
+    )
+
+    // Working O
+    static filterTableByHeaders = createAsyncThunk(
+        'table/filter/:table_name',
+        async (table_info) => {
+            console.log('table_info is ', table_info);
+            let data = {};
+            await $api.get(`/table/filter/${table_info.table_name}${table_info.query}`)
+                .then((response) => {
+                    console.log('response is ', response);
+                    data.data = response.data;
+                    data.status = response.status;
+                }).catch((err) => {
+                    console.log('err is ', err);
                     data.data = err.response.data;
                     data.status = err.response.status;
                 })

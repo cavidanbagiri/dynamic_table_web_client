@@ -1,5 +1,5 @@
 
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, original } from "@reduxjs/toolkit"
 
 import axios from "axios"
 
@@ -22,10 +22,13 @@ const initialState = {
     fetch_table:{
         table_info: [],
         headers: [],
+        filter_header_query: '?',
+        filter_header_query_dict: {},
         table_information:{
             total_rows: 0,
             total_columns: 0,
-            table_size: 0
+            table_size: 0,
+            original_table_name: '',
         }
     },
     
@@ -39,6 +42,16 @@ export const tableSlice = createSlice({
         setShowMessageInitial: (state) => {
             state.show_message = -1;
         },
+
+        updateFilterHeaderQuery: (state, action) => {
+            state.fetch_table.filter_header_query_dict[action.payload.key] = action.payload.value;
+            state.fetch_table.filter_header_query = '?';
+            Object.keys(state.fetch_table.filter_header_query_dict).forEach((key) => {
+                state.fetch_table.filter_header_query += key + '=' + state.fetch_table.filter_header_query_dict[key] + '&';
+            });
+            state.fetch_table.filter_header_query = state.fetch_table.filter_header_query.slice(0, -1);
+            console.log('filter query is ', state.fetch_table.filter_header_query);
+        }
 
     },
 
@@ -119,6 +132,7 @@ export const tableSlice = createSlice({
                 state.fetch_table.table_information.total_rows = action.payload.data.total_rows;
                 state.fetch_table.table_information.total_columns = action.payload.data.total_columns;
                 state.fetch_table.table_information.table_size = action.payload.data.table_size;
+                state.fetch_table.table_information.original_table_name = action.payload.data.original_table_name;
             }
             else{
                 state.fetch_table.table_info = [];
@@ -129,6 +143,6 @@ export const tableSlice = createSlice({
     }
 })
 
-export const { setShowMessageInitial } = tableSlice.actions
+export const { setShowMessageInitial, updateFilterHeaderQuery } = tableSlice.actions
 
 export default tableSlice.reducer

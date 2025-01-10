@@ -2,13 +2,11 @@
 Front
 
 1 - Front - Create table design - Ready
-
     1.1 - Need To show, how many percent of data is ready - Stopped
 
+
 2 - Show Table headers and datas in frontend - Working on
-    1.1 - Show table headers - On Working
-    1.2 - Add data filter under table headers - Stopped
-    1.3 - Show table data - Ready
+    1.1 - Add data filter under table headers - Working on
 
 
 
@@ -16,6 +14,7 @@ Front
 
 Back
 
+1 - Get filter query for each columns - Working on
 
 
 
