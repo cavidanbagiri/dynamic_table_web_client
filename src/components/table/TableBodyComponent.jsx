@@ -1,13 +1,17 @@
+
 import React from 'react'
 
+import {useSelector} from 'react-redux'
 
+function TableBodyComponent() {
 
-function TableBodyComponent(props) {
+    const fetch_table = useSelector(state => state.tableSlice.fetch_table);
+
     return (
         <>
             <tbody className='w-full'>
                 {
-                    props.table_info.map((row, rowIndex) => (
+                    fetch_table.table_info.map((row, rowIndex) => (
                         <tr key={rowIndex} className='text-sm'>
                             <td className='border border-gray-200 p-2 text-xs'>
                                 {rowIndex + 1}

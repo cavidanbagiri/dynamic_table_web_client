@@ -19,7 +19,16 @@ const initialState = {
         pending: false,
         message: '',
     },
-    table_info: [],
+    fetch_table:{
+        table_info: [],
+        headers: [],
+        table_information:{
+            total_rows: 0,
+            total_columns: 0,
+            table_size: 0
+        }
+    },
+    
 }
 
 export const tableSlice = createSlice({
@@ -105,11 +114,14 @@ export const tableSlice = createSlice({
         // Fetch Table by name
         builder.addCase(TableService.fetchTableByName.fulfilled, (state, action) => {
             if(action.payload.status == 200){
-                state.table_info = action.payload.data;
-                console.log('object is ', state.table_info);
+                state.fetch_table.table_info = action.payload.data.data;
+                state.fetch_table.headers = Object.keys(action.payload.data.data[0]);
+                state.fetch_table.table_information.total_rows = action.payload.data.total_rows;
+                state.fetch_table.table_information.total_columns = action.payload.data.total_columns;
+                state.fetch_table.table_information.table_size = action.payload.data.table_size;
             }
             else{
-                state.table_info = [];
+                state.fetch_table.table_info = [];
             }
         })
         

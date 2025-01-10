@@ -11,6 +11,8 @@ import './App.css'
 
 import router from './router/index.jsx'
 import UserService from './service/UserService.js';
+import { Tab } from '@mui/material';
+import TableService from './service/TableService.js';
 
 
 
@@ -24,8 +26,12 @@ function App() {
     if(is_auth === false){
       dispatch(UserService.refresh());
     }
+    else{
+      dispatch(TableService.fetchFavoriteTables());
+    }
   },
-);
+  [is_auth]
+  );
 
 
   return (

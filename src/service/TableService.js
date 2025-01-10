@@ -101,11 +101,9 @@ class TableService {
             let data = {};
             await $api.get(`/table/fetch/${table_name}`)
                 .then((response) => {
-                    console.log('coming response is ', response);
                     data.data = response.data;
                     data.status = response.status;
                 }).catch((err) => {
-                    console.log('coming error is ', err);
                     data.data = err.response.data;
                     data.status = err.response.status;
                 })

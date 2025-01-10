@@ -1,7 +1,10 @@
 
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-function TableHeaderComponent(props) {
+function TableHeaderComponent() {
+
+    const fetch_table = useSelector(state => state.tableSlice.fetch_table);
 
     return (
         <>
@@ -11,8 +14,8 @@ function TableHeaderComponent(props) {
                         <span>Index</span>
                     </th>
                     {
-                        props.table_info.length > 0 &&
-                        Object.keys(props.table_info[0]).map((header) => {
+                        fetch_table.table_info.length > 0 &&
+                        fetch_table.headers.map((header) => {
                             header = header.replace('_', ' ')
                             header = header.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
                             if (header === 'Id') {
@@ -33,14 +36,15 @@ function TableHeaderComponent(props) {
                         <input type="text" placeholder="Search..." className="w-full text-center font-medium " />
                     </th>
                     {
-                        props.table_info.length > 0 &&
-                        Object.keys(props.table_info[0]).map((header) => {
+                        fetch_table.table_info.length > 0 &&
+                        fetch_table.headers.map((header) => {
                             if (header === 'id') {
                                 return null; 
                             }
                             return (
                                 <th key={header} className='border border-white w-24 p-2'>
-                                    <input type="text" placeholder={`Search ${header}`} className="w-full text-center font-medium" />
+                                    <input type="text" 
+                                    placeholder={`Search ${header}`} className="w-full text-center font-medium" />
                                 </th>
                             );
                         })

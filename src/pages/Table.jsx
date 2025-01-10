@@ -18,7 +18,7 @@ function Table() {
 
   const dispatch = useDispatch();
 
-  const table_info = useSelector((state) => state.tableSlice.table_info);
+  const fetch_table = useSelector((state) => state.tableSlice.fetch_table);
 
   useEffect(() => {
     if (tablename) {
@@ -33,14 +33,14 @@ function Table() {
   return (
     <div className='flex flex-col '>
       {
-        tablename && table_info ?
+        tablename && fetch_table.table_info ?
           <>
             <TextareaInformationComponent />
             <TableFilterExecuteComponent />
             <span className='text-start text-2xl font-medium mt-4'>Table Result</span>
             <table className='w-full'>
-              <TableHeaderComponent table_info={table_info} />
-              <TableBodyComponent table_info={table_info} />
+              <TableHeaderComponent />
+              <TableBodyComponent />
             </table>
           </>
           : null

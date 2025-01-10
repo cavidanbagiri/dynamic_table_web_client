@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { setShowMessageInitial } from '../../store/table_store';
 
-import TableService from '../../service/TableService';
 
 import FavoriteIconComponent from '../common/FavoriteIconComponent';
 import MessageBox from '../common/MessageBox';
@@ -33,12 +32,6 @@ export default function FavoritTables() {
             }, 1500);
         }
     }, [show_message]);
-
-    useEffect(() => {
-        if (is_auth) {
-            dispatch(TableService.fetchFavoriteTables());
-        }
-    }, [is_auth]);
 
     return (
         <>
