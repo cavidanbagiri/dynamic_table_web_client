@@ -10,6 +10,8 @@ function TableHeaderComponent() {
 
     const fetch_table = useSelector(state => state.tableSlice.fetch_table);
 
+    
+
     return (
         <>
             <thead className='bg-gray-200 text-sm'>
@@ -18,7 +20,7 @@ function TableHeaderComponent() {
                         <span>Index</span>
                     </th>
                     {
-                        fetch_table.table_info.length > 0 &&
+                        fetch_table.table_info.length >= 0 &&
                         fetch_table.headers.map((header) => {
                             header = header.replace('_', ' ')
                             header = header.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
@@ -40,7 +42,7 @@ function TableHeaderComponent() {
                         <input type="text" placeholder="Search..." className="w-full text-center font-medium " />
                     </th>
                     {
-                        fetch_table.table_info.length > 0 &&
+                        fetch_table.table_info.length >= 0 &&
                         fetch_table.headers.map((header) => {
                             if (header === 'id') {
                                 return null; 

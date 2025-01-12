@@ -11,22 +11,19 @@ import TableHeaderComponent from '../components/table/TableHeaderComponent';
 import TableBodyComponent from '../components/table/TableBodyComponent';
 import TableFilterExecuteComponent from '../components/table/TableFilterExecuteComponent';
 import TextareaInformationComponent from '../components/table/TextareaInformationComponent';
+import TableSkeleton from '../components/common/TableSkeleton';
 
-function Table() {
+function MainTable() {
 
   const { tablename } = useParams();
-
+  
   const dispatch = useDispatch();
 
   const fetch_table = useSelector((state) => state.tableSlice.fetch_table);
 
   useEffect(() => {
-    if (tablename) {
-      dispatch(TableService.fetchTableByName(tablename));
-    }
-  }, []);
-
-  
+    dispatch(TableService.fetchTableByName(tablename));
+  }, [tablename]);
 
 
 
@@ -40,8 +37,22 @@ function Table() {
             <span className='text-start text-2xl font-medium mt-4'>Table Result</span>
             <table className='w-full'>
               <TableHeaderComponent />
-              <TableBodyComponent />
+              {
+                !fetch_table.pending && !fetch_table.table_information.filter_information.pending ?
+
+                  <TableBodyComponent />
+
+                  : null
+              }
             </table>
+            {
+              fetch_table.pending || fetch_table.table_information.filter_information.pending ?
+
+                <TableSkeleton />
+
+                : null
+            }
+
           </>
           : null
       }
@@ -49,4 +60,4 @@ function Table() {
   )
 }
 
-export default Table
+export default MainTable

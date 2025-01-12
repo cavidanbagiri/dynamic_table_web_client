@@ -11,10 +11,11 @@ import TableService from "../service/TableService.js"
 const initialState = {
     my_tables: [], // My created tables
     public_tables: [], // Public tables
+    public_table_pending: false, // Table pending
     favorite_tables: [], // Favorite tables
+    favorite_table_pending: false, // Favorite table pending
     front_message: '', // Frontend message
     show_message: -1, // Show message
-    table_pending: false, // Table pending
     table_created:{ // Table created
         pending: false,
         message: '',
@@ -24,12 +25,15 @@ const initialState = {
         headers: [], // Get Table Headers
         filter_header_query: '?',
         filter_header_query_dict: {},
+        pending: false,
         table_information:{
             total_rows: 0,
             total_columns: 0,
             table_size: 0,
             original_table_name: '',
             filter_information:{
+                // reset_button: false,
+                pending: false,
                 total_rows: 0,
                 execution_time: 0,
                 table_size: 0,
@@ -61,7 +65,11 @@ export const tableSlice = createSlice({
                 state.fetch_table.filter_header_query += key + '=' + state.fetch_table.filter_header_query_dict[key] + '&';
             });
             state.fetch_table.filter_header_query = state.fetch_table.filter_header_query.slice(0, -1);
-            console.log('filter query is ', state.fetch_table.filter_header_query);
+        },
+
+        clearFilterHeaderQuery: (state) => {
+            state.fetch_table.filter_header_query = '?';
+            state.fetch_table.filter_header_query_dict = {};
         }
 
     },
@@ -71,21 +79,21 @@ export const tableSlice = createSlice({
 
         // Show Public tables
         builder.addCase(TableService.getPublicTables.pending, (state, action) => {
-            state.table_pending = true
+            state.public_table_pending = true
         })
         builder.addCase(TableService.getPublicTables.fulfilled, (state, action) => {
             state.public_tables = action.payload.data;
-            state.table_pending = false
+            state.public_table_pending = false
         })
         
 
         // Fetch Favorite tables
         builder.addCase(TableService.fetchFavoriteTables.pending, (state, action) => {
-            state.table_pending = true
+            state.favorite_table_pending = true
         })
         builder.addCase(TableService.fetchFavoriteTables.fulfilled, (state, action) => {
             state.favorite_tables = action.payload.data;
-            state.table_pending = false
+            state.favorite_table_pending = false
         })
 
         // Add to favorites
@@ -136,14 +144,20 @@ export const tableSlice = createSlice({
 
 
         // Fetch Table by name
+        builder.addCase(TableService.fetchTableByName.pending, (state, action) => {
+            state.fetch_table.pending = true
+        })
         builder.addCase(TableService.fetchTableByName.fulfilled, (state, action) => {
             if(action.payload.status == 200){
+                state.fetch_table.pending = false
                 state.fetch_table.table_info = action.payload.data.data;
-                state.fetch_table.headers = Object.keys(action.payload.data.data[0]);
+                state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
+                state.fetch_table.headers = action.payload.data.headers;
                 state.fetch_table.table_information.total_rows = action.payload.data.total_rows;
                 state.fetch_table.table_information.total_columns = action.payload.data.total_columns;
                 state.fetch_table.table_information.table_size = action.payload.data.table_size;
                 state.fetch_table.table_information.original_table_name = action.payload.data.original_table_name;
+                state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
             }
             else{
                 state.fetch_table.table_info = [];
@@ -152,19 +166,16 @@ export const tableSlice = createSlice({
 
 
         // Filter table by headers
+        builder.addCase(TableService.filterTableByHeaders.pending, (state, action) => {
+            state.fetch_table.table_information.filter_information.pending = true
+        })
         builder.addCase(TableService.filterTableByHeaders.fulfilled, (state, action) => {
             if(action.payload.status == 200){
-                
+                state.fetch_table.table_information.filter_information.pending = false
                 state.fetch_table.table_info = action.payload.data.data;
+                state.fetch_table.headers = action.payload.data.headers;
                 state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
                 state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
-                // state.fetch_table.headers = Object.keys(action.payload.data[0]);
-                // state.fetch_table.table_info = action.payload.data.data;
-                // state.fetch_table.headers = Object.keys(action.payload.data.data[0]);
-                // state.fetch_table.table_information.total_rows = action.payload.data.total_rows;
-                // state.fetch_table.table_information.total_columns = action.payload.data.total_columns;
-                // state.fetch_table.table_information.table_size = action.payload.data.table_size;
-                // state.fetch_table.table_information.original_table_name = action.payload.data.original_table_name;
             }
             else{
                 state.fetch_table.table_info = [];
@@ -174,6 +185,6 @@ export const tableSlice = createSlice({
     }
 })
 
-export const { setShowMessageInitial, updateFilterHeaderQuery } = tableSlice.actions
+export const { setShowMessageInitial, updateFilterHeaderQuery, clearFilterHeaderQuery } = tableSlice.actions
 
 export default tableSlice.reducer

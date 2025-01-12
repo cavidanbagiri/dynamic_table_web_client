@@ -10,7 +10,7 @@ function PublicTablesComponent() {
 
     const dispatch = useDispatch();
     const public_tables = useSelector((state) => state.tableSlice.public_tables);
-    const table_pending = useSelector((state) => state.tableSlice.table_pending);
+    const public_table_pending = useSelector((state) => state.tableSlice.public_table_pending);
 
 
     useEffect(() => {
@@ -26,7 +26,7 @@ function PublicTablesComponent() {
 
 
             {
-                !table_pending === true ?
+                !public_table_pending === true ?
                     <table>
 
                         <thead>

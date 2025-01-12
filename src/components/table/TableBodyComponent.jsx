@@ -3,6 +3,7 @@ import React from 'react'
 
 import {useSelector} from 'react-redux'
 
+
 function TableBodyComponent() {
 
     const fetch_table = useSelector(state => state.tableSlice.fetch_table);
@@ -31,7 +32,8 @@ function TableBodyComponent() {
                         </tr>
                     ))
                 }
-            </tbody>
+            </tbody>           
+            
         </>
     );
 }

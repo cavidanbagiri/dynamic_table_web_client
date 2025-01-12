@@ -5,26 +5,18 @@ Front
     1.1 - Need To show, how many percent of data is ready - Stopped
 
 
-2 - Show Table headers and datas in frontend - Working on
-    1.1 - Add data filter under table headers - Working on
-
+2 - Show Table headers and datas in frontend - Ready
+    2.1 - Show headers in frontend, if user wants, can show or hide then headers - Stopped
 
 
 
 
 Back
 
-1 - Get filter query for each columns - Ready
-
-2 - After filter some data, need to return back some information about returnung result - Working on
-
+2 - Show my public and private tables - Stopped
 
 
 
 Bugs
 
-2 - Bug* - Front - after adding table in favorites, table name show as lowercase , after refresh table name show as uppercase - Fixed
-
-3 - Bug* - Back - after adding some table as favorites, l cant see same table as public in another user - Fixed
-
-4 - Bug* - Back - after select some tables as favorites, without refreshing, l cant fetch table - Fixed
+1 - Fetcing data from backend happened two times when l click button from homepage - Need to fix

@@ -21,7 +21,7 @@ export default function FavoritTables() {
     const show_message = useSelector((state) => state.tableSlice.show_message);
     const favorite_tables = useSelector((state) => state.tableSlice.favorite_tables);
     const front_message = useSelector((state) => state.tableSlice.front_message);
-    const table_pending = useSelector((state) => state.tableSlice.table_pending);
+    const favorite_table_pending = useSelector((state) => state.tableSlice.favorite_table_pending);
 
     const is_auth = useSelector((state) => state.loginRegisterSlice.is_auth);
 
@@ -51,7 +51,7 @@ export default function FavoritTables() {
                     <h1 className='text-2xl font-medium text-start my-6'>Favorite Tables</h1>
 
                     {
-                        table_pending === true ?
+                        favorite_table_pending === true ?
                             <TableSkeleton /> :
                             favorite_tables.length === 0 ?
                                 <span className='text-md mt-2 text-gray-500'>

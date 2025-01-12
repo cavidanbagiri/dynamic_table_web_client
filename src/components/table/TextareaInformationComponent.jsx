@@ -6,9 +6,13 @@ import { CiViewTable } from "react-icons/ci";
 
 import TableService from "../../service/TableService";
 
+import { useNavigate } from "react-router-dom";
+
 function TextareaInformationComponent() {
 
   const dispatch = useDispatch();
+  
+  const navigate = useNavigate();
 
   const fetch_table = useSelector(state => state.tableSlice.fetch_table);
   const favorite_tables = useSelector(state => state.tableSlice.favorite_tables);
@@ -16,6 +20,7 @@ function TextareaInformationComponent() {
   const textareaStyle = {
     width: 'calc(100% - 410px)',
   };
+
 
   return (
     <div className="flex flex-row h-96">
@@ -34,13 +39,15 @@ function TextareaInformationComponent() {
         <span className="text-md text-gray-500 text-center">Favorites</span>
         {
           favorite_tables.map((table, index) => (
-            <span key={index} onClick={() => {
+            <span key={index} 
+            onClick={() => {
+              navigate(`/table/${table.original_table_name}`);
               dispatch(TableService.fetchTableByName(table.original_table_name));
-            }} 
-            className="py-1 flex flex-row items-center rounded-md hover:bg-gray-100 cursor-pointer">
-              <CiViewTable/>
+            }}
+              className="py-1 flex flex-row items-center rounded-md hover:bg-gray-100 cursor-pointer">
+              <CiViewTable />
               <span className="text-xs ml-2 ">
-              {table.table_name}
+                {table.table_name}
               </span>
             </span>
           ))
