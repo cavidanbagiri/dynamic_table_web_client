@@ -20,8 +20,8 @@ const initialState = {
         message: '',
     },
     fetch_table:{
-        table_info: [],
-        headers: [],
+        table_info: [], // For fething table data
+        headers: [], // Get Table Headers
         filter_header_query: '?',
         filter_header_query_dict: {},
         table_information:{
@@ -29,6 +29,11 @@ const initialState = {
             total_columns: 0,
             table_size: 0,
             original_table_name: '',
+            filter_information:{
+                total_rows: 0,
+                execution_time: 0,
+                table_size: 0,
+            }
         }
     },
     
@@ -44,7 +49,13 @@ export const tableSlice = createSlice({
         },
 
         updateFilterHeaderQuery: (state, action) => {
-            state.fetch_table.filter_header_query_dict[action.payload.key] = action.payload.value;
+            
+            if(action.payload.value == ''){
+                delete state.fetch_table.filter_header_query_dict[action.payload.key];
+            }else{
+                state.fetch_table.filter_header_query_dict[action.payload.key] = action.payload.value;
+            }
+
             state.fetch_table.filter_header_query = '?';
             Object.keys(state.fetch_table.filter_header_query_dict).forEach((key) => {
                 state.fetch_table.filter_header_query += key + '=' + state.fetch_table.filter_header_query_dict[key] + '&';
@@ -138,7 +149,27 @@ export const tableSlice = createSlice({
                 state.fetch_table.table_info = [];
             }
         })
-        
+
+
+        // Filter table by headers
+        builder.addCase(TableService.filterTableByHeaders.fulfilled, (state, action) => {
+            if(action.payload.status == 200){
+                
+                state.fetch_table.table_info = action.payload.data.data;
+                state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
+                state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
+                // state.fetch_table.headers = Object.keys(action.payload.data[0]);
+                // state.fetch_table.table_info = action.payload.data.data;
+                // state.fetch_table.headers = Object.keys(action.payload.data.data[0]);
+                // state.fetch_table.table_information.total_rows = action.payload.data.total_rows;
+                // state.fetch_table.table_information.total_columns = action.payload.data.total_columns;
+                // state.fetch_table.table_information.table_size = action.payload.data.table_size;
+                // state.fetch_table.table_information.original_table_name = action.payload.data.original_table_name;
+            }
+            else{
+                state.fetch_table.table_info = [];
+            }
+        })
 
     }
 })
