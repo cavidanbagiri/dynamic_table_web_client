@@ -196,6 +196,24 @@ export const tableSlice = createSlice({
             }
         })
 
+
+        // Filter table by sql_query
+        builder.addCase(TableService.filterTableByQuery.pending, (state, action) => {
+            state.fetch_table.table_information.filter_information.pending = true
+        })
+        builder.addCase(TableService.filterTableByQuery.fulfilled, (state, action) => {
+            if(action.payload.status == 200){
+                state.fetch_table.table_information.filter_information.pending = false
+                state.fetch_table.table_info = action.payload.data.data;     
+                state.fetch_table.headers = action.payload.data.headers;
+                state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;  
+                state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
+            }
+            else{
+                state.fetch_table.table_info = [];
+            }
+        })
+
     }
 })
 

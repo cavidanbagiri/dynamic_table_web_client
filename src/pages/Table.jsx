@@ -10,7 +10,7 @@ import TableService from '../service/TableService';
 import TableHeaderComponent from '../components/table/TableHeaderComponent';
 import TableBodyComponent from '../components/table/TableBodyComponent';
 import TableFilterExecuteComponent from '../components/table/TableFilterExecuteComponent';
-import TextareaInformationComponent from '../components/table/TextareaInformationComponent';
+import TableInformationComponent from '../components/table/TableInformationComponent';
 import TableSkeleton from '../components/common/TableSkeleton';
 
 function MainTable() {
@@ -32,7 +32,7 @@ function MainTable() {
       {
         tablename && fetch_table.table_info ?
           <>
-            <TextareaInformationComponent />
+            <TableInformationComponent />
             <TableFilterExecuteComponent />
             <span className='text-start text-2xl font-medium mt-4'>Table Result</span>
             <table className='w-full'>

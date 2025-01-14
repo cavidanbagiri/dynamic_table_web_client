@@ -147,6 +147,24 @@ class TableService {
         }
     )
 
+    // Working
+    static filterTableByQuery = createAsyncThunk(
+        'table/query',
+        async (sql_query) => {
+            console.log('coming sql_query is ', sql_query);
+            let data = {};
+            await $api.post(`/table/query`, {sql_query})
+                .then((response) => {  
+                    data.data = response.data;
+                    data.status = response.status;
+                }).catch((err) => {
+                    data.data = err.response.data;
+                    data.status = err.response.status;
+                })
+            return data;
+        }
+    )
+
 }
 
 export default TableService;

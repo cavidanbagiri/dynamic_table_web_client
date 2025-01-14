@@ -7,8 +7,9 @@ import { CiViewTable } from "react-icons/ci";
 import TableService from "../../service/TableService";
 
 import { useNavigate } from "react-router-dom";
+import TextAreaComponent from "./TextAreaComponent";
 
-function TextareaInformationComponent() {
+function TableInformationComponent() {
 
   const dispatch = useDispatch();
   
@@ -16,10 +17,6 @@ function TextareaInformationComponent() {
 
   const fetch_table = useSelector(state => state.tableSlice.fetch_table);
   const favorite_tables = useSelector(state => state.tableSlice.favorite_tables);
-
-  const textareaStyle = {
-    width: 'calc(100% - 410px)',
-  };
 
 
   return (
@@ -54,12 +51,10 @@ function TextareaInformationComponent() {
         }
       </div>
 
-      <textarea
-        style={{ fontFamily: "JetBrains Mono", ...textareaStyle }}
-        className=" w-full rounded-md p-2 border border-gray-300 my-2 outline-gray-400 text-sm"
-      ></textarea>
+      <TextAreaComponent />
+      
     </div>
   );
 }
 
-export default TextareaInformationComponent;
+export default TableInformationComponent;
