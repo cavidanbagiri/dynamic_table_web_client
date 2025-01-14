@@ -25,6 +25,25 @@ class TableService {
         }
     )
 
+    // Working On
+    static fetchMyTables = createAsyncThunk(
+        'table/fetchmytables',
+        async () => {
+            let data = {};
+            await $api.get('/table/fetchmytables')
+                .then((response) => {
+                    console.log('coming response is  ', response);
+                    data.data = response.data;
+                    data.status = response.status;
+                }).catch((err) => {
+                    console.log('coming error is  ', err);
+                    data.data = err.response.data;
+                    data.status = err.response.status;
+                })
+            return data;
+        }
+    )
+
     // Checked
     static fetchFavoriteTables = createAsyncThunk(
         'table/fetchfavoritetables',

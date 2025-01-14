@@ -85,7 +85,21 @@ export const tableSlice = createSlice({
             state.public_tables = action.payload.data;
             state.public_table_pending = false
         })
-        
+
+
+        // Fetch My Tables
+        builder.addCase(TableService.fetchMyTables.pending, (state, action) => {
+            state.my_table_pending = true
+        })
+        builder.addCase(TableService.fetchMyTables.fulfilled, (state, action) => {
+            state.my_tables = action.payload.data;
+            state.my_table_pending = false
+            console.log('my tables are ', state.my_tables);
+        })
+        builder.addCase(TableService.fetchMyTables.rejected, (state, action) => {
+            state.my_table_pending = false
+        })
+
 
         // Fetch Favorite tables
         builder.addCase(TableService.fetchFavoriteTables.pending, (state, action) => {
