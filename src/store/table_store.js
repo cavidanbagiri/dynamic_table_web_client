@@ -32,11 +32,12 @@ const initialState = {
             table_size: 0,
             original_table_name: '',
             filter_information:{
-                // reset_button: false,
                 pending: false,
                 total_rows: 0,
                 execution_time: 0,
                 table_size: 0,
+                error_status: -1,
+                error_message: '',
             }
         }
     },
@@ -70,7 +71,17 @@ export const tableSlice = createSlice({
         clearFilterHeaderQuery: (state) => {
             state.fetch_table.filter_header_query = '?';
             state.fetch_table.filter_header_query_dict = {};
-        }
+        },
+
+        setFilterSQLQueryStatusInitial: (state) => {
+            state.fetch_table.table_information.filter_information.error_status = -1;
+            state.fetch_table.table_information.filter_information.error_message = '';
+        },
+
+        setFilterSQLQueryStatusForFailed: (state, action) => {
+            state.fetch_table.table_information.filter_information.error_status = 1;
+            state.fetch_table.table_information.filter_information.error_message = 'Please select query for execution first and then click execute';
+        },
 
     },
 
@@ -208,15 +219,18 @@ export const tableSlice = createSlice({
                 state.fetch_table.headers = action.payload.data.headers;
                 state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;  
                 state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
+                state.fetch_table.table_information.filter_information.error_status = 0
             }
             else{
-                state.fetch_table.table_info = [];
+                // state.fetch_table.table_info = [];
+                state.fetch_table.table_information.filter_information.error_status = 1
+                state.fetch_table.table_information.filter_information.error_message = action.payload.data.detail;
             }
         })
 
     }
 })
 
-export const { setShowMessageInitial, updateFilterHeaderQuery, clearFilterHeaderQuery } = tableSlice.actions
+export const { setShowMessageInitial, updateFilterHeaderQuery, clearFilterHeaderQuery, setFilterSQLQueryStatusInitial, setFilterSQLQueryStatusForFailed } = tableSlice.actions
 
 export default tableSlice.reducer

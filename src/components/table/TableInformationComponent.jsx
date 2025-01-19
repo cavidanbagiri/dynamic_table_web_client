@@ -1,13 +1,15 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { CiViewTable } from "react-icons/ci";
 
 import TableService from "../../service/TableService";
 
-import { useNavigate } from "react-router-dom";
-import TextAreaComponent from "./TextAreaComponent";
+import MessageBox from "../common/MessageBox";
+import CodeEditor from "./CodeEditor";
+import {setFilterSQLQueryStatusInitial} from '../../store/table_store'
 
 function TableInformationComponent() {
 
@@ -18,9 +20,21 @@ function TableInformationComponent() {
   const fetch_table = useSelector(state => state.tableSlice.fetch_table);
   const favorite_tables = useSelector(state => state.tableSlice.favorite_tables);
 
+  useEffect(() => {
+    if(fetch_table.table_information.filter_information.error_status == 1){
+      setTimeout(() => {
+        dispatch(setFilterSQLQueryStatusInitial());
+      }, 3000)
+    }
+  }, [fetch_table]);
 
   return (
     <div className="flex flex-row h-96">
+
+      {
+        fetch_table.table_information.filter_information.error_status == 1 &&
+        <MessageBox message={fetch_table.table_information.filter_information.error_message} color={'bg-red-500'} />
+      }
 
       <div className="flex flex-col text-start w-96 p-2 m-2 border border-gray-300 rounded-md">
         <span className="text-md text-gray-500 text-center">Information</span>
@@ -51,7 +65,8 @@ function TableInformationComponent() {
         }
       </div>
 
-      <TextAreaComponent />
+    
+      <CodeEditor />
       
     </div>
   );

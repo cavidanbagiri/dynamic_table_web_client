@@ -158,6 +158,7 @@ class TableService {
                     data.data = response.data;
                     data.status = response.status;
                 }).catch((err) => {
+                    console.log('object is ', err);
                     data.data = err.response.data;
                     data.status = err.response.status;
                 })

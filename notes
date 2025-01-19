@@ -13,10 +13,14 @@ Front
 3 - if not table available or another problem, execute button loading goes on - Stopped
 
 
-4 - Send sql query to backend for execution - Working on
+4 - Send sql query to backend for execution - Working
+    4.1 - Need to write more beaufiul sql components - Working On
 
 
 5 - Need to fix when user entered directly table methods, show all tables for executing some commands - Stopped
+
+
+6 - Need to write an alg. for opening tables from public section - Stopped
 
 
 Back
