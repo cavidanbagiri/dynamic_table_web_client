@@ -38,6 +38,9 @@ const initialState = {
                 table_size: 0,
                 error_status: -1,
                 error_message: '',
+            },
+            result_information:{ 
+                status: -1,
             }
         }
     },
@@ -82,6 +85,10 @@ export const tableSlice = createSlice({
             state.fetch_table.table_information.filter_information.error_status = 1;
             state.fetch_table.table_information.filter_information.error_message = 'Please select query for execution first and then click execute';
         },
+
+        setFilterSQLQueryResultStatusInitial: (state, action) => {
+            state.fetch_table.table_information.result_information.status = -1;
+        }
 
     },
 
@@ -183,8 +190,11 @@ export const tableSlice = createSlice({
                 state.fetch_table.table_information.table_size = action.payload.data.table_size;
                 state.fetch_table.table_information.original_table_name = action.payload.data.original_table_name;
                 state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
+                state.fetch_table.table_information.filter_information.error_status = 1
             }
             else{
+                state.fetch_table.pending = false
+                state.fetch_table.table_information.filter_information.error_status = 0;
                 state.fetch_table.table_info = [];
             }
         })
@@ -203,6 +213,8 @@ export const tableSlice = createSlice({
                 state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
             }
             else{
+                state.fetch_table.table_information.filter_information.pending = false
+                state.fetch_table.table_information.filter_information.error_status = 0;
                 state.fetch_table.table_info = [];
             }
         })
@@ -213,24 +225,30 @@ export const tableSlice = createSlice({
             state.fetch_table.table_information.filter_information.pending = true
         })
         builder.addCase(TableService.filterTableByQuery.fulfilled, (state, action) => {
+            console.log('here is working');
             if(action.payload.status == 200){
                 state.fetch_table.table_information.filter_information.pending = false
                 state.fetch_table.table_info = action.payload.data.data;     
                 state.fetch_table.headers = action.payload.data.headers;
                 state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;  
                 state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
-                state.fetch_table.table_information.filter_information.error_status = 0
+                state.fetch_table.table_information.filter_information.error_status = 1
+                state.fetch_table.table_information.result_information.status = 1
             }
             else{
-                // state.fetch_table.table_info = [];
-                state.fetch_table.table_information.filter_information.error_status = 1
+                state.fetch_table.table_information.filter_information.pending = false;
+                state.fetch_table.table_information.filter_information.error_status = 0;
+                state.fetch_table.table_information.result_information.status = 0
                 state.fetch_table.table_information.filter_information.error_message = action.payload.data.detail;
             }
         })
+        
 
     }
 })
 
-export const { setShowMessageInitial, updateFilterHeaderQuery, clearFilterHeaderQuery, setFilterSQLQueryStatusInitial, setFilterSQLQueryStatusForFailed } = tableSlice.actions
+export const { setShowMessageInitial, updateFilterHeaderQuery, clearFilterHeaderQuery, setFilterSQLQueryStatusInitial, setFilterSQLQueryStatusForFailed,
+    setFilterSQLQueryResultStatusInitial
+ } = tableSlice.actions
 
 export default tableSlice.reducer

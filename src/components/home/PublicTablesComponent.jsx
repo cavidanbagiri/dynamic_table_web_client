@@ -5,10 +5,14 @@ import TableService from '../../service/TableService';
 import FavoriteIconComponent from '../common/FavoriteIconComponent';
 import TableSkeleton from '../common/TableSkeleton';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom'; 
 
 function PublicTablesComponent() {
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+
     const public_tables = useSelector((state) => state.tableSlice.public_tables);
     const public_table_pending = useSelector((state) => state.tableSlice.public_table_pending);
 
@@ -46,8 +50,10 @@ function PublicTablesComponent() {
 
                                 public_tables.map((table, index) => {
                                     return (
-                                        <tr key={index} className='text-sm'>
-                                            <td className='flex items-center justify-center border border-white py-2 '>
+                                        <tr key={index} className='text-sm hover:bg-gray-200 cursor-pointer'
+                                        onClick={() => navigate(`/table/${table.original_table_name}`)}
+                                        >
+                                            <td className='flex items-center justify-center border border-white'>
                                                 <FavoriteIconComponent rule='add' table_id={table.id} />
                                             </td>
                                             <td className='border border-white p-2'>{index + 1}</td>

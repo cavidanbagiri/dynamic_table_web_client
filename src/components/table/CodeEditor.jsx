@@ -59,7 +59,6 @@ function CodeEditor() {
                     editorRef.current = editor; // Assign the editor instance to the ref
                 }}
             />
-            <button onClick={getSelectedText}>Get Selected Text</button>
         </div>
     );
 }

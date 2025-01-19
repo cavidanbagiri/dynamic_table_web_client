@@ -2,6 +2,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
 import { setShowMessageInitial } from '../../store/table_store';
 
@@ -10,7 +11,6 @@ import FavoriteIconComponent from '../common/FavoriteIconComponent';
 import MessageBox from '../common/MessageBox';
 import TableSkeleton from '../common/TableSkeleton';
 
-import { useNavigate } from 'react-router-dom';
 
 export default function FavoritTables() {
 

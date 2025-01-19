@@ -48,8 +48,7 @@ function TableFilterExecuteComponent() {
       <div className='mx-2 font-thin text-xs' style={{ fontFamily: 'JetBrains Mono' }}>
         <span className='ml-2'>
 
-          {
-            
+        {
             fetch_table.pending ? null
               :
 
@@ -57,8 +56,15 @@ function TableFilterExecuteComponent() {
               ?
               <span className='font-bold text-yellow-500'>Pending Operation</span>
               :
+              fetch_table.table_information.filter_information.error_status == 1 ?
               <>
                 <span className='font-bold text-green-500'>Completed Operation : </span>
+                <span className='ml-2'>Query Time: {fetch_table.table_information.filter_information.execution_time}ms/</span>
+                <span className='ml-2'>Total Rows: {fetch_table.table_information.filter_information.total_rows}/</span>
+              </>
+              :
+              <>
+                <span className='font-bold text-red-500'>Wrong Operation : </span>
                 <span className='ml-2'>Query Time: {fetch_table.table_information.filter_information.execution_time}ms/</span>
                 <span className='ml-2'>Total Rows: {fetch_table.table_information.filter_information.total_rows}/</span>
               </>
