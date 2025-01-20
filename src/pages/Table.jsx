@@ -12,6 +12,7 @@ import TableBodyComponent from '../components/table/TableBodyComponent';
 import TableFilterExecuteComponent from '../components/table/TableFilterExecuteComponent';
 import TableInformationComponent from '../components/table/TableInformationComponent';
 import TableSkeleton from '../components/common/TableSkeleton';
+import GeneralTableComponent from '../components/table/GeneralTableComponent';
 
 function MainTable() {
 
@@ -22,7 +23,9 @@ function MainTable() {
   const fetch_table = useSelector((state) => state.tableSlice.fetch_table);
 
   useEffect(() => {
-    dispatch(TableService.fetchTableByName(tablename));
+    if(tablename){
+      dispatch(TableService.fetchTableByName(tablename));
+    }
   }, [tablename]);
 
 
@@ -30,7 +33,7 @@ function MainTable() {
   return (
     <div className='flex flex-col '>
       {
-        tablename && fetch_table.table_info ?
+        tablename  ?
           <>
             <TableInformationComponent />
             <TableFilterExecuteComponent />
@@ -54,7 +57,8 @@ function MainTable() {
             }
 
           </>
-          : null
+          : 
+          <GeneralTableComponent/>
       }
     </div>
   )

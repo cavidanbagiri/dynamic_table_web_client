@@ -43,8 +43,8 @@ function CreateTable() {
             formData.append('table_status', table_status);
             formData.append('table_description', table_description);
             formData.append('table_name', replace_table_name);
-            console.log('object is ', formData);
-            // dispatch(TableService.createTable(formData));
+            // console.log('object is ', formData);
+            dispatch(TableService.createTable(formData));
         }
     }
 

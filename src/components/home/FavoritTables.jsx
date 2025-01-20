@@ -45,11 +45,12 @@ export default function FavoritTables() {
 
             {
                 is_auth &&
-                <div className='flex flex-col items-start mb-3'>
+                <div className='flex flex-col items-start my-2 400 w-full'>
 
 
-                    <h1 className='text-2xl font-medium text-start my-6'>Favorite Tables</h1>
+                    <h1 className='text-2xl font-medium text-start mb-2'>Favorite Tables</h1>
 
+                    <div className='flex flex-row justify-start items-center  w-full'>
                     {
                         favorite_table_pending === true ?
                             <TableSkeleton /> :
@@ -59,15 +60,16 @@ export default function FavoritTables() {
                                 </span>
                                 :
                                 favorite_tables.map((table, index) => (
-                                    <div className='flex items-center w-full py-2 px-3 ' key={index}>
-                                        <FavoriteIconComponent table_id={table.id} rule={'delete'} />
+                                    <div className='flex items-center  mr-2 px-1 border rounded-md cursor-pointer hover:bg-gray-100' key={index}>
+                                        <FavoriteIconComponent  table_id={table.id} rule={'delete'} />
 
-                                        <span onClick={() => navigate(`/table/${table.original_table_name}`)} className='text-md ml-2'>
+                                        <span onClick={() => navigate(`/table/${table.original_table_name}`)} className='text-xs '>
                                             {table.table_name.replace('_', ' ')}
                                         </span>
                                     </div>
                                 ))
                     }
+                    </div>
 
                 </div>
             }

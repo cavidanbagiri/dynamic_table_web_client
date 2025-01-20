@@ -82,7 +82,7 @@ export const tableSlice = createSlice({
         },
 
         setFilterSQLQueryStatusForFailed: (state, action) => {
-            state.fetch_table.table_information.filter_information.error_status = 1;
+            state.fetch_table.table_information.filter_information.error_status = 0;
             state.fetch_table.table_information.filter_information.error_message = 'Please select query for execution first and then click execute';
         },
 
@@ -112,7 +112,6 @@ export const tableSlice = createSlice({
         builder.addCase(TableService.fetchMyTables.fulfilled, (state, action) => {
             state.my_tables = action.payload.data;
             state.my_table_pending = false
-            console.log('my tables are ', state.my_tables);
         })
         builder.addCase(TableService.fetchMyTables.rejected, (state, action) => {
             state.my_table_pending = false
@@ -180,6 +179,7 @@ export const tableSlice = createSlice({
             state.fetch_table.pending = true
         })
         builder.addCase(TableService.fetchTableByName.fulfilled, (state, action) => {
+            console.log('content is ', action.payload);
             if(action.payload.status == 200){
                 state.fetch_table.pending = false
                 state.fetch_table.table_info = action.payload.data.data;
@@ -191,10 +191,12 @@ export const tableSlice = createSlice({
                 state.fetch_table.table_information.original_table_name = action.payload.data.original_table_name;
                 state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
                 state.fetch_table.table_information.filter_information.error_status = 1
+                state.fetch_table.table_information.result_information.status = 1
             }
             else{
                 state.fetch_table.pending = false
                 state.fetch_table.table_information.filter_information.error_status = 0;
+                state.fetch_table.table_information.result_information.status = 0
                 state.fetch_table.table_info = [];
             }
         })
@@ -225,7 +227,6 @@ export const tableSlice = createSlice({
             state.fetch_table.table_information.filter_information.pending = true
         })
         builder.addCase(TableService.filterTableByQuery.fulfilled, (state, action) => {
-            console.log('here is working');
             if(action.payload.status == 200){
                 state.fetch_table.table_information.filter_information.pending = false
                 state.fetch_table.table_info = action.payload.data.data;     

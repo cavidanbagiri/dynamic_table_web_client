@@ -12,7 +12,7 @@ function TableBodyComponent() {
         <>
             <tbody className='w-full'>
                 {
-                    fetch_table.table_info.map((row, rowIndex) => (
+                    fetch_table?.table_info?.map((row, rowIndex) => (
                         <tr key={rowIndex} className='text-sm'>
                             <td className='border border-gray-200 p-2 text-xs'>
                                 {rowIndex + 1}

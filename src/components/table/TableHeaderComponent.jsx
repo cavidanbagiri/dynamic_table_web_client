@@ -20,8 +20,8 @@ function TableHeaderComponent() {
                         <span>Index</span>
                     </th>
                     {
-                        fetch_table.table_info.length >= 0 &&
-                        fetch_table.headers.map((header) => {
+                        fetch_table?.table_info?.length >= 0 &&
+                        fetch_table?.headers?.map((header) => {
                             header = header.replace('_', ' ')
                             header = header.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
                             if (header === 'Id') {
@@ -42,8 +42,8 @@ function TableHeaderComponent() {
                         <input type="text" placeholder="Search..." className="w-full text-center font-medium " />
                     </th>
                     {
-                        fetch_table.table_info.length >= 0 &&
-                        fetch_table.headers.map((header) => {
+                        fetch_table?.table_info?.length >= 0 &&
+                        fetch_table?.headers?.map((header) => {
                             if (header === 'id') {
                                 return null; 
                             }

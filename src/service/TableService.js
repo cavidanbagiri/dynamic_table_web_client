@@ -8,8 +8,6 @@ class TableService {
     // Checked
     static getPublicTables = createAsyncThunk(
         'table/fetchpublictables?user_id',
-
-        
         async (user_id) => {
             const query = user_id == null ? '' : `?user_id=${user_id}`;
             let data = {};
@@ -32,11 +30,9 @@ class TableService {
             let data = {};
             await $api.get('/table/fetchmytables')
                 .then((response) => {
-                    console.log('coming response is  ', response);
                     data.data = response.data;
                     data.status = response.status;
                 }).catch((err) => {
-                    console.log('coming error is  ', err);
                     data.data = err.response.data;
                     data.status = err.response.status;
                 })
@@ -151,14 +147,13 @@ class TableService {
     static filterTableByQuery = createAsyncThunk(
         'table/query',
         async (sql_query) => {
-            console.log('coming sql_query is ', sql_query);
             let data = {};
             await $api.post(`/table/query`, {sql_query})
                 .then((response) => {  
+                    console.log(response);
                     data.data = response.data;
                     data.status = response.status;
                 }).catch((err) => {
-                    console.log('object is ', err);
                     data.data = err.response.data;
                     data.status = err.response.status;
                 })

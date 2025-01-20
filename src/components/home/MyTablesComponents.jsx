@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -32,42 +32,44 @@ function MyTablesComponents() {
 
       {
         is_auth &&
-        <div className='flex flex-col items-start mb-3'>
+        <div className='flex flex-row items-start justify-between mb-3  w-full'>
 
-          <span className='text-2xl font-medium '>My Tables</span>
+          <div className='flex flex-col items-start'>
 
-          {
-            my_tables.length > 0 ?
-              <div className='flex flex-row flex-wrap'>
+            <span className='text-2xl font-medium '>My Tables</span>
 
-                {
-                  my_tables.map((table, index) => {
-                    return (
-                      <div className='flex flex-col items-start p-2 m-2 border border-gray-300 rounded-md' key={index}>
-                        <span 
-                        onClick={() => {
-                          navigate(`/table/${table.original_table_name}`);
-                          dispatch(TableService.fetchTableByName(table.original_table_name));
-                        }}
-                        className='text-md font-medium cursor-pointer'>{table.table_name}</span>
-                      </div>
-                    )
-                  })
-                }
+            {
+              my_tables.length > 0 ?
+                <div className='flex flex-row flex-wrap'>
 
-              </div>
-              :
-              <span className='text-md my-2 text-gray-500'>
-                There is no tables
-              </span>
-          }
+                  {
+                    my_tables.map((table, index) => {
+                      return (
+                        <div className='flex flex-col items-start p-2 mt-2 mr-2 border border-gray-300 rounded-md' key={index}>
+                          <span
+                            onClick={() => {
+                              navigate(`/table/${table.original_table_name}`);
+                              dispatch(TableService.fetchTableByName(table.original_table_name));
+                            }}
+                            className='text-xs cursor-pointer'>{table.table_name}</span>
+                        </div>
+                      )
+                    })
+                  }
 
+                </div>
+                :
+                <span className='text-md my-2 text-gray-500'>
+                  There is no tables
+                </span>
+            }
+          </div>
 
           <div>
             <button
               onClick={() => navigate('/createtable')}
               className='flex items-center my-2 border p-2 bg-green-500 text-white rounded-md text-sm font-medium hover:bg-green-300 hover:text-white duration-200'>
-              Create Table <FaRegFileExcel className='text-2xl text-white ' />
+              Create New Table &nbsp; <FaRegFileExcel className='text-md text-white ' />
             </button>
 
           </div>

@@ -69,12 +69,12 @@ function FavoriteIconComponent({ table_id, rule }) {
                         setCond(true);
                     }
                 }}
-                className='w-10 h-10 flex items-center justify-center rounded-full cursor-pointer'
+                className='w-8 h-8 flex items-center justify-center rounded-full cursor-pointer'
             >
 
 
                 {cond ? (
-                    <FaStar className='text-xl text-yellow-300 m-auto ' />
+                    <FaStar className='text-md text-yellow-300 m-auto ' />
                 ) : (
                     <CiStar className='text-xl text-gray-500 m-auto' />
                 )}
