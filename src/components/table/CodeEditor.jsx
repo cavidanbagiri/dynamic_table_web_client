@@ -75,7 +75,7 @@ function CodeEditor() {
             <MonacoEditor
                 className='w-full rounded-md p-2 border border-gray-300 outline-gray-400 text-sm'
                 defaultLanguage="sql"
-                defaultValue={tablename ? `-- columns [${fetch_table.headers.join(', ')}] \n-- select * from ${tablename}`
+                defaultValue={tablename ? `-- columns [${fetch_table?.headers?.join(', ')}] \n-- select * from ${tablename}`
                     : ''}
                 options={{
                     selectOnLineNumbers: true, // Enable line number selection

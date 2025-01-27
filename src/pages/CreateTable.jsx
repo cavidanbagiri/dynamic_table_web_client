@@ -23,6 +23,7 @@ function CreateTable() {
     const [table_name, setTableName] = useState(null);
     const [table_status, setTableStatus] = useState('public');
     const [table_description, setTableDescription] = useState(null);
+    const [category, setCategory] = useState(null);
 
     const handleFileChange = (e) => {
         if (e.target.files) {
@@ -36,14 +37,14 @@ function CreateTable() {
             return;
         }
         else {
-            if(!table_name || !table_status || !table_description) return alert('Table name, status and description fields are required');
+            if(!table_name || !table_status || !table_description || !category) return alert('Table name, status, description and category fields are required');
             const replace_table_name = table_name.replace(/ /g, "_");
             let formData = new FormData()
             formData.append('file', file);
             formData.append('table_status', table_status);
             formData.append('table_description', table_description);
             formData.append('table_name', replace_table_name);
-            // console.log('object is ', formData);
+            formData.append('table_category', category);
             dispatch(TableService.createTable(formData));
         }
     }
@@ -53,7 +54,7 @@ function CreateTable() {
         if (show_message === 1 || show_message === 0) {
             setTimeout(() => {
                 dispatch(setShowMessageInitial());
-            }, 1500);
+            }, 3000);
         }
     }, [show_message])
 
@@ -72,6 +73,10 @@ function CreateTable() {
             <input type="file" onChange={handleFileChange} />
 
             <input type="text" onChange={(e) => setTableName(e.target.value)} placeholder='Table Name'
+                className='mt-4 mb-2 border p-2 rounded-md outline-gray-400 w-64'
+            />
+
+            <input type="text" onChange={(e) => setCategory(e.target.value)} placeholder='Category'
                 className='mt-4 mb-2 border p-2 rounded-md outline-gray-400 w-64'
             />
 

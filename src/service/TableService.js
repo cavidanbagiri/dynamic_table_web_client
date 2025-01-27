@@ -13,6 +13,7 @@ class TableService {
             let data = {};
             await $api.get(`/table/fetchpublictables${query}`)
             .then((response) => {
+                console.log('coming tables is ', response);
                 data.data = response.data;
                 data.status = response.status;
             }).catch((err) => {
