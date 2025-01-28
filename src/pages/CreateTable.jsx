@@ -54,7 +54,7 @@ function CreateTable() {
         if (show_message === 1 || show_message === 0) {
             setTimeout(() => {
                 dispatch(setShowMessageInitial());
-            }, 3000);
+            }, 10000);
         }
     }, [show_message])
 
