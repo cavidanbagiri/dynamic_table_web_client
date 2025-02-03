@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import TableService from '../../service/TableService';
 import FavoriteIconComponent from '../common/FavoriteIconComponent';
 import TableSkeleton from '../common/TableSkeleton';
-import moment from 'moment';
 import { useNavigate } from 'react-router-dom'; 
 
 function PublicTablesComponent() {
@@ -51,25 +50,27 @@ function PublicTablesComponent() {
 
                                 public_tables.map((table, index) => {
                                     return (
-                                        <tr key={index} className='text-xs hover:bg-gray-200 cursor-pointer '
+                                        <tr key={index} className='text-xs hover:bg-gray-200 cursor-pointer border'
                                         onClick={() => navigate(`/table/${table.original_table_name}`)}
                                         >
-                                            <td className='flex  items-center justify-center  border border-white'>
+                                            <td className='flex  items-center justify-center '>
                                                 <FavoriteIconComponent rule='add' table_id={table.id} />
                                             </td>
-                                            <td className='border border-white'>{index + 1}</td>
-                                            <td className='border border-white text-start'>{table.table_name}</td>
-                                            <td className='border border-white line-clamp-1 text-start'>{table.table_description}</td>
-                                            <td className='border border-white text-start'>
+                                            <td className='px-1 text-center'>{index + 1}</td>
+                                            <td className='px-1 text-start'>{table.table_name}</td>
+                                            <td className='px-1 text-start'>
+                                                <span className='line-clamp-1 p-1'>{table.table_description}</span>
+                                            </td>
+                                            <td className='px-1 text-start'>
                                             <span><span className='text-gray-500 font-medium'>Col</span>:{table.column_size}</span>
                                             <span> / <span className='text-gray-500 font-medium'>Row</span>:{table.row_size}</span>
                                             </td>
-                                            <td className='border border-white'>
+                                            <td className=''>
                                                 {
                                                     table.table_category === null ? '-' : table?.table_category?.charAt(0).toUpperCase() + table?.table_category?.slice(1)
                                                 }
                                             </td>
-                                            <td className='border border-white p-2'>{table.username} {table.username}</td>
+                                            <td className=''>{table.username} {table.username}</td>
                                         </tr>
                                     )
                                 })
@@ -81,11 +82,8 @@ function PublicTablesComponent() {
                     <TableSkeleton />
             }
 
-
-
-
         </div>
     )
 }
 
-export default PublicTablesComponent
+export default PublicTablesComponent;

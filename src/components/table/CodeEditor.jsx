@@ -16,6 +16,7 @@ function CodeEditor() {
 
     const fetch_table = useSelector(state => state.tableSlice.fetch_table);
 
+    const [tableName, setTableName] = useState('');
     const [headers, setHeaders] = useState([]);
 
     const { tablename } = useParams();
@@ -35,26 +36,21 @@ function CodeEditor() {
         }
     };
 
-
     useEffect(() => {
         if (tablename) {
-            dispatch(TableService.fetchTableByName(tablename));
+            setTableName(tablename);
         }
     }, [tablename]);
+    
 
-    // useEffect(() => {
-    //     if (tablename) {
-    //         console.log('if work');
-    //         setHeaders(fetch_table.headers);
-    //     }
-    //     else{
-    //         console.log('else work');
-    //     }
-    // }, [tablename]);
+    useEffect(() => {
+        if (fetch_table.headers) {
+            setHeaders(fetch_table.headers);
+        }
+    }, [fetch_table.headers]);
 
     return (
         <div style={{ fontFamily: "JetBrains Mono", ...textareaStyle }} className='flex flex-row w-full rounded-md my-2 outline-gray-400 text-sm'>
-
 
             <div className="flex flex-col text-start w-24 p-2 mr-2 border border-gray-300 rounded-md">
                 <button onClick={() => {
@@ -75,15 +71,15 @@ function CodeEditor() {
             <MonacoEditor
                 className='w-full rounded-md p-2 border border-gray-300 outline-gray-400 text-sm'
                 defaultLanguage="sql"
-                defaultValue={tablename ? `-- columns [${fetch_table?.headers?.join(', ')}] \n-- select * from ${tablename}`
+                value={tableName ? `-- Table information: Total size: ${fetch_table.table_information.table_size} / total rows: ${fetch_table.table_information.total_rows} / total columns: ${fetch_table.table_information.total_columns} \n-- columns [${headers?.join(', ')}] \n-- select * from ${tableName}`
                     : ''}
                 options={{
-                    selectOnLineNumbers: true, // Enable line number selection
-                    lineNumbers: 'on', // Show line numbers
-                    automaticLayout: true, // Automatically adjust layout
+                    selectOnLineNumbers: true,
+                    lineNumbers: 'on',
+                    automaticLayout: true,
                 }}
                 onMount={(editor) => {
-                    editorRef.current = editor; // Assign the editor instance to the ref
+                    editorRef.current = editor;
                 }}
             />
         </div>

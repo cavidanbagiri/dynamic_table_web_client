@@ -14,7 +14,7 @@ function TableHeaderComponent() {
 
     return (
         <>
-            <thead className='bg-gray-200 text-sm'>
+            <thead className='bg-gray-200 text-xs'>
                 <tr>
                     <th className='border border-white w-24 p-2'>
                         <span>Index</span>
@@ -28,7 +28,7 @@ function TableHeaderComponent() {
                                 return null; 
                             }
                             return (
-                                <th key={header} className='border border-white w-24 p-2'>
+                                <th key={header} className='border border-white w-24 p-2 font-medium'>
                                     <span>
                                         {header}
                                     </span>
@@ -39,7 +39,7 @@ function TableHeaderComponent() {
                 </tr>
                 <tr >
                     <th className='border border-white w-24 p-2'>
-                        <input type="text" placeholder="Search..." className="w-full text-center font-medium " />
+                        <input type="text" placeholder="Search..." className="w-full text-center  " />
                     </th>
                     {
                         fetch_table?.table_info?.length >= 0 &&

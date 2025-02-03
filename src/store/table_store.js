@@ -179,7 +179,6 @@ export const tableSlice = createSlice({
             state.fetch_table.pending = true
         })
         builder.addCase(TableService.fetchTableByName.fulfilled, (state, action) => {
-            console.log('content is ', action.payload);
             if(action.payload.status == 200){
                 state.fetch_table.pending = false
                 state.fetch_table.table_info = action.payload.data.data;

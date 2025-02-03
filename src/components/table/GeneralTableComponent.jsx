@@ -27,19 +27,10 @@ function GeneralTableComponent() {
             <div className='flex flex-row h-96 '>
 
                 <div className="flex flex-col text-start w-96  p-2 m-2 border border-gray-300 rounded-md">
-                    <span className="text-sm text-gray-500 text-center">Information</span>
-                    {
-                        fetch_table.table_information && (
-                            <div className="flex flex-col text-xs text-gray-500 ">
-                                <span className="">Total Rows: {fetch_table.table_information.total_rows}</span>
-                                <span className="">Total Columns: {fetch_table.table_information.total_columns}</span>
-                                <span className="">Total Size: {fetch_table.table_information.table_size}</span>
-                            </div>
-                        )
-                    }
+                    
                     <span className="text-xs text-gray-500 text-center">Favorites</span>
 
-                    <div className="flex flex-row justify-start items-center my-2 ">
+                    <div className="flex flex-col justify-start items-start my-2 ">
 
                         {
                             favorite_tables.map((table, index) => (

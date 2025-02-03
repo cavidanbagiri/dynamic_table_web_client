@@ -14,7 +14,7 @@ function TableBodyComponent() {
                 {
                     fetch_table?.table_info?.map((row, rowIndex) => (
                         <tr key={rowIndex} className='text-sm'>
-                            <td className='border border-gray-200 p-2 text-xs'>
+                            <td className='border border-gray-200 p-1 text-xs '>
                                 {rowIndex + 1}
                             </td>
                             {
@@ -23,7 +23,7 @@ function TableBodyComponent() {
                                         return null; 
                                     }
                                     return (
-                                        <td key={cellIndex} className='border border-gray-200 p-2 text-xs'>
+                                        <td key={cellIndex} className='border border-gray-200 p-1 text-xs'>
                                             {row[key]}
                                         </td>
                                     );

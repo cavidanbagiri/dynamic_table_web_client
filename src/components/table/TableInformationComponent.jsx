@@ -54,20 +54,11 @@ function TableInformationComponent() {
         } color={'bg-green-500'} />
       }
 
-      <div className="flex flex-col text-start w-96 p-2 m-2 border border-gray-300 rounded-md">
-        <span className="text-sm text-gray-500 text-center">Information</span>
-        {
-          fetch_table.table_information && (
-            <div className="flex flex-col text-xs text-gray-500 ">
-              <span className="">Total Rows: {fetch_table.table_information.total_rows}</span>
-              <span className="">Total Columns: {fetch_table.table_information.total_columns}</span>
-              <span className="">Total Size: {fetch_table.table_information.table_size}</span>
-            </div>
-          )
-        }
-        <span className="text-xs text-gray-500 text-center">Favorites</span>
+      <div className="flex flex-col text-start w-84 p-2 m-2 border border-gray-300 rounded-md">
+        
+        <span className="text-sm text-gray-500 text-center font-medium">Favorites</span>
 
-        <div className="flex flex-row justify-start items-center my-2 ">
+        <div className="flex flex-col justify-start items-start my-2 ">
 
           {
             favorite_tables.map((table, index) => (
@@ -76,9 +67,9 @@ function TableInformationComponent() {
                   navigate(`/table/${table.original_table_name}`);
                   dispatch(TableService.fetchTableByName(table.original_table_name));
                 }}
-                className="py-1 flex flex-row items-center rounded-md hover:bg-gray-100 cursor-pointer mx-1 border p-1">
+                className="p-1 mt-1 flex flex-row items-center border rounded-md bg-green-500 text-white hover:bg-green-400 duration-300 cursor-pointer">
                 <CiViewTable />
-                <span className="text-xs ml-2 ">
+                <span className="text-xs px-2">
                   {table.table_name}
                 </span>
               </span>

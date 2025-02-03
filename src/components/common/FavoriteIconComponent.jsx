@@ -42,11 +42,9 @@ function FavoriteIconComponent({ table_id, rule }) {
 
                         if (rule === 'add') {
                             dispatch(TableService.addToFavorites(table_id));
-                            // dispatch(TableService.fetchFavoriteTables());
                         }
                         else if (rule === 'delete') {
                             dispatch(TableService.deleteFromFavorites(table_id));
-                            // dispatch(TableService.fetchFavoriteTables());
                         }
                     }
                     else {
@@ -69,14 +67,14 @@ function FavoriteIconComponent({ table_id, rule }) {
                         setCond(true);
                     }
                 }}
-                className='w-8 h-8 flex items-center justify-center rounded-full cursor-pointer'
+                className='w-8 h-8 flex items-center justify-center rounded-full cursor-pointer border-white'
             >
 
 
                 {cond ? (
-                    <FaStar className='text-md text-yellow-300 m-auto ' />
+                    <FaStar className='text-xl text-yellow-300 m-auto ' />
                 ) : (
-                    <CiStar className='text-xl text-gray-500 m-auto' />
+                    <CiStar className='text-lg text-gray-500 m-auto' />
                 )}
 
             </div>
