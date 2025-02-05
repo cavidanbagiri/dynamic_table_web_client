@@ -72,7 +72,7 @@ function FavoriteIconComponent({ table_id, rule }) {
 
 
                 {cond ? (
-                    <FaStar className='text-xl text-yellow-300 m-auto ' />
+                    <FaStar className='text-lg text-yellow-300 m-auto ' />
                 ) : (
                     <CiStar className='text-lg text-gray-500 m-auto' />
                 )}

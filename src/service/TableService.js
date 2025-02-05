@@ -13,7 +13,6 @@ class TableService {
             let data = {};
             await $api.get(`/table/fetchpublictables${query}`)
             .then((response) => {
-                console.log('coming tables is ', response);
                 data.data = response.data;
                 data.status = response.status;
             }).catch((err) => {
@@ -30,17 +29,17 @@ class TableService {
         async () => {
             let data = {};
             await $api.get('/table/fetchmytables')
-                .then((response) => {
-                    data.data = response.data;
-                    data.status = response.status;
-                }).catch((err) => {
-                    data.data = err.response.data;
-                    data.status = err.response.status;
-                })
+            .then((response) => {
+                data.data = response.data;
+                data.status = response.status;
+            }).catch((err) => {
+                data.data = err.response.data;
+                data.status = err.response.status;
+            })
             return data;
         }
     )
-
+    
     // Checked
     static fetchFavoriteTables = createAsyncThunk(
         'table/fetchfavoritetables',
@@ -144,7 +143,7 @@ class TableService {
         }
     )
 
-    // Working
+    // Checked
     static filterTableByQuery = createAsyncThunk(
         'table/query',
         async (sql_query) => {
@@ -155,6 +154,26 @@ class TableService {
                     data.data = response.data;
                     data.status = response.status;
                 }).catch((err) => {
+                    data.data = err.response.data;
+                    data.status = err.response.status;
+                })
+            return data;
+        }
+    )
+
+
+    // Working On
+    static deleteTable = createAsyncThunk(
+        'table/deletetable/:table_name',
+        async (table_name) => {
+            let data = {};
+            await $api.delete(`/table/deletetable/${table_name}`)
+                .then((response) => {
+                    console.log('coming response id ', response);
+                    data.data = response.data;
+                    data.status = response.status;
+                }).catch((err) => {
+                    console.log('coming error is ',err);
                     data.data = err.response.data;
                     data.status = err.response.status;
                 })

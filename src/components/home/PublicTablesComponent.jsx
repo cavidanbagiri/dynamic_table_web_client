@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import TableService from '../../service/TableService';
 import FavoriteIconComponent from '../common/FavoriteIconComponent';
 import TableSkeleton from '../common/TableSkeleton';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 function PublicTablesComponent() {
 
@@ -23,9 +23,9 @@ function PublicTablesComponent() {
 
     return (
 
-        <div className=' flex flex-col w-full'>
+        <div className=' flex flex-col w-full p-2 ml-3 rounded-md'>
 
-            <h1 className='text-2xl font-medium text-start my-6'>Public Tables</h1>
+            <h1 className='text-2xl font-medium text-start '>Public Tables</h1>
 
 
             {
@@ -51,7 +51,7 @@ function PublicTablesComponent() {
                                 public_tables.map((table, index) => {
                                     return (
                                         <tr key={index} className='text-xs hover:bg-gray-200 cursor-pointer border'
-                                        onClick={() => navigate(`/table/${table.original_table_name}`)}
+                                            onClick={() => navigate(`/table/${table.original_table_name}`)}
                                         >
                                             <td className='flex  items-center justify-center '>
                                                 <FavoriteIconComponent rule='add' table_id={table.id} />
@@ -62,10 +62,10 @@ function PublicTablesComponent() {
                                                 <span className='line-clamp-1 p-1'>{table.table_description}</span>
                                             </td>
                                             <td className='px-1 text-start'>
-                                            <span><span className='text-gray-500 font-medium'>Col</span>:{table.column_size}</span>
-                                            <span> / <span className='text-gray-500 font-medium'>Row</span>:{table.row_size}</span>
+                                                <span><span className='text-gray-500 font-medium'>Col</span>:{table.column_size}</span>
+                                                <span> / <span className='text-gray-500 font-medium'>Row</span>:{table.row_size}</span>
                                             </td>
-                                            <td className=''>
+                                            <td className='text-center'>
                                                 {
                                                     table.table_category === null ? '-' : table?.table_category?.charAt(0).toUpperCase() + table?.table_category?.slice(1)
                                                 }

@@ -8,16 +8,18 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { useNavigate } from 'react-router-dom'
 
-import { FaRegFileExcel } from "react-icons/fa";
+import { FaTable } from "react-icons/fa";
 
 import TableService from '../../service/TableService';
+
+import SearchMyTablesAndFavoriteComponent from './SearchMyTablesAndFavoriteComponent';
 
 function MyTablesComponents() {
 
   const dispatch = useDispatch();
 
   const is_auth = useSelector((state) => state.loginRegisterSlice.is_auth);
-  const my_tables = useSelector((state) => state.tableSlice.my_tables);
+  const my_tables_filter = useSelector((state) => state.tableSlice.my_tables_filter);
 
   const navigate = useNavigate();
 
@@ -32,30 +34,37 @@ function MyTablesComponents() {
 
       {
         is_auth &&
-        <div className='flex flex-row items-start justify-between mb-3  w-full'>
+        <div className='flex flex-col items-start border-b p-2 w-full h-1/2 overflow-hidden overflow-y-auto'>
 
           <div className='flex flex-col items-start'>
 
-            <span className='text-2xl font-medium '>My Tables</span>
+            <span className='text-xl font-medium '>My Tables</span>
+
+            <SearchMyTablesAndFavoriteComponent />
 
             {
-              my_tables.length > 0 ?
-                <div className='flex flex-row flex-wrap'>
+              my_tables_filter.length > 0 ?
+                <div className='flex flex-col w-full  '>
 
                   {
-                    my_tables.map((table, index) => {
+                    my_tables_filter.map((table, index) => {
                       return (
-                        <div className='flex flex-col items-start p-2 mt-2 mr-2 border border-gray-300 rounded-md' key={index}>
+                        <div onClick={() => {
+                          navigate(`/table/${table.original_table_name}`);
+                          dispatch(TableService.fetchTableByName(table.original_table_name));
+                        }}
+                        className='flex flex-col items-start p-2 mt-1 mr-2 rounded-md hover:bg-gray-100 cursor-pointer ' key={index}>
                           <span
-                            onClick={() => {
-                              navigate(`/table/${table.original_table_name}`);
-                              dispatch(TableService.fetchTableByName(table.original_table_name));
-                            }}
-                            className='text-xs cursor-pointer'>{table.table_name}</span>
+                            className='flex  flex-row items-center text-sm '>
+                              <FaTable className='text-sm mr-1 text-green-500 '/>
+                              {table.table_name}
+                          </span>
                         </div>
                       )
                     })
                   }
+                
+                  
 
                 </div>
                 :
@@ -63,15 +72,6 @@ function MyTablesComponents() {
                   There is no tables
                 </span>
             }
-          </div>
-
-          <div>
-            <button
-              onClick={() => navigate('/createtable')}
-              className='flex items-center my-2 border p-2 bg-green-500 text-white rounded-md text-sm font-medium hover:bg-green-300 hover:text-white duration-200'>
-              Create New Table &nbsp; <FaRegFileExcel className='text-md text-white ' />
-            </button>
-
           </div>
 
 

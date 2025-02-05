@@ -19,7 +19,7 @@ export default function FavoritTables() {
     const navigate = useNavigate();
 
     const show_message = useSelector((state) => state.tableSlice.show_message);
-    const favorite_tables = useSelector((state) => state.tableSlice.favorite_tables);
+    const favorite_tables_filter = useSelector((state) => state.tableSlice.favorite_tables_filter);
     const front_message = useSelector((state) => state.tableSlice.front_message);
     const favorite_table_pending = useSelector((state) => state.tableSlice.favorite_table_pending);
 
@@ -45,25 +45,26 @@ export default function FavoritTables() {
 
             {
                 is_auth &&
-                <div className='flex flex-col items-start my-2 400 w-full'>
+                <div className='flex flex-col items-start p-2 400 w-full  h-1/2 overflow-hidden overflow-y-auto'>
 
 
-                    <h1 className='text-2xl font-medium text-start mb-2'>Favorite Tables</h1>
+                    <h1 className='text-xl font-medium'>Favorite Tables</h1>
 
-                    <div className='flex flex-row justify-start items-center  w-full'>
+                    <div className='flex flex-col justify-start items-start my-2 w-full '>
                     {
                         favorite_table_pending === true ?
                             <TableSkeleton /> :
-                            favorite_tables.length === 0 ?
+                            favorite_tables_filter.length === 0 ?
                                 <span className='text-md mt-2 text-gray-500'>
                                     There is no favorite tables
                                 </span>
                                 :
-                                favorite_tables.map((table, index) => (
-                                    <div className='flex items-center  mr-2 px-1 border rounded-md cursor-pointer hover:bg-gray-100' key={index}>
+                                favorite_tables_filter.map((table, index) => (
+                                    <div onClick={() => navigate(`/table/${table.original_table_name}`)} 
+                                    className='flex py-1 items-center mt-1 w-full rounded-md hover:bg-gray-100 cursor-pointer' key={index}>
                                         <FavoriteIconComponent  table_id={table.id} rule={'delete'} />
 
-                                        <span onClick={() => navigate(`/table/${table.original_table_name}`)} className='text-xs '>
+                                        <span className='text-sm'>
                                             {table.table_name.replace('_', ' ')}
                                         </span>
                                     </div>

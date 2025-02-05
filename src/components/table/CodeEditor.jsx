@@ -15,15 +15,19 @@ function CodeEditor() {
     const dispatch = useDispatch();
 
     const fetch_table = useSelector(state => state.tableSlice.fetch_table);
+    const my_tables = useSelector(state => state.tableSlice.my_tables);
 
     const [tableName, setTableName] = useState('');
     const [headers, setHeaders] = useState([]);
+    const [showDeleteButton, setShowDeleteButton] = useState(false);
 
     const { tablename } = useParams();
 
     const editorRef = useRef(null); // Create a ref for the editor
 
-    const textareaStyle = { width: 'calc(100% - 410px)' };
+    const textareaStyle = { width: 'calc(100% - 220px)' };
+
+
 
     const getSelectedText = () => {
         if (editorRef.current) {
@@ -49,6 +53,7 @@ function CodeEditor() {
         }
     }, [fetch_table.headers]);
 
+
     return (
         <div style={{ fontFamily: "JetBrains Mono", ...textareaStyle }} className='flex flex-row w-full rounded-md my-2 outline-gray-400 text-sm'>
 
@@ -66,6 +71,8 @@ function CodeEditor() {
                     className="flex flex-row text-sm items-center py-1 px-2 bg-gray-300 hover:bg-gray-400 hover:text-white rounded-md">
                     <IoMdPlay className="text-sm mr-1" /> Run
                 </button>
+
+               
             </div>
 
             <MonacoEditor

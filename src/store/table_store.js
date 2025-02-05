@@ -10,9 +10,11 @@ import TableService from "../service/TableService.js"
 
 const initialState = {
     my_tables: [], // My created tables
+    my_tables_filter: [], // My created tables
     public_tables: [], // Public tables
     public_table_pending: false, // Table pending
     favorite_tables: [], // Favorite tables
+    favorite_tables_filter: [], // Favorite tables
     favorite_table_pending: false, // Favorite table pending
     front_message: '', // Frontend message
     show_message: -1, // Show message
@@ -88,6 +90,17 @@ export const tableSlice = createSlice({
 
         setFilterSQLQueryResultStatusInitial: (state, action) => {
             state.fetch_table.table_information.result_information.status = -1;
+        },
+
+        searchMyTableAndFavoriteTable: (state, action) => {
+
+            state.my_tables_filter = state.my_tables.filter((table) => {
+                return table.table_name.toLowerCase().includes(action.payload.toLowerCase())
+            })
+
+            state.favorite_tables_filter = state.favorite_tables.filter((table) => {
+                return table.table_name.toLowerCase().includes(action.payload.toLowerCase())
+            })
         }
 
     },
@@ -111,6 +124,7 @@ export const tableSlice = createSlice({
         })
         builder.addCase(TableService.fetchMyTables.fulfilled, (state, action) => {
             state.my_tables = action.payload.data;
+            state.my_tables_filter = action.payload.data;
             state.my_table_pending = false
         })
         builder.addCase(TableService.fetchMyTables.rejected, (state, action) => {
@@ -124,6 +138,7 @@ export const tableSlice = createSlice({
         })
         builder.addCase(TableService.fetchFavoriteTables.fulfilled, (state, action) => {
             state.favorite_tables = action.payload.data;
+            state.favorite_tables_filter = action.payload.data;
             state.favorite_table_pending = false
         })
 
@@ -248,7 +263,7 @@ export const tableSlice = createSlice({
 })
 
 export const { setShowMessageInitial, updateFilterHeaderQuery, clearFilterHeaderQuery, setFilterSQLQueryStatusInitial, setFilterSQLQueryStatusForFailed,
-    setFilterSQLQueryResultStatusInitial
+    setFilterSQLQueryResultStatusInitial, searchMyTableAndFavoriteTable
  } = tableSlice.actions
 
 export default tableSlice.reducer

@@ -1,29 +1,41 @@
 
-Front
+************************ Front
 
 1 - Show Table headers and datas in frontend - Stopped
     2.1 - Show headers in frontend, if user wants, can show or hide then headers - Stopped
     2.2 - If user login, show tables side, need to think the algorithm - Stopped
 
 
-2 - Need to add search tab for public tables - Stopped
+2 - Need to add search tab for public tables - Stopped - Short
+
+3 - Need to create new table from creating section with buttons - Stopped - Long
+
+4 - Need to create a new table from code editor - Stopped - Long
+
+5 - Need to update table, add or delet new columns or rows - Stopped - Long
 
 
-Back
+
+************************ Back
 
 1 - Need to check who wants to update table - Stopped
 
-2 - Need to create deleta table - Stopped
+2 - Need to create deleta table - Working ON
 
 
 
-Bugs
+************************ Bugs
 
-1 - Fetcing data from backend happened two times when l click button from homepage - Need to fix
-
-
+1 - Fetcing data from backend happened two times when l click button from homepage - Stopped
 
 
-Future
+
+************************ Design
+
+1 - Need to fix design table page after user login - Stopped - Short  
+
+
+
+************************ Future
 
 1 - Need To show, how many percent of data is ready - Stopped

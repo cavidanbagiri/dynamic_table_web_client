@@ -6,14 +6,19 @@ import FavoritTables from '../components/home/FavoritTables';
 
 function Home() {
     return (
-        <div className=" flex flex-col items-start p-2">
+        <div className=" flex flex-row items-start p-2">
 
-            <MyTablesComponents />
+            <div className='flex flex-col h-screen border rounded-md '>
 
-            <FavoritTables />
+                <MyTablesComponents />
+
+                <FavoritTables />
+
+            </div>
+
 
             <PublicTablesComponent />
-     
+
         </div>
     );
 }

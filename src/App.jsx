@@ -28,6 +28,7 @@ function App() {
     }
     else{
       dispatch(TableService.fetchFavoriteTables());
+      dispatch(TableService.fetchMyTables());
     }
   },
   [is_auth]
