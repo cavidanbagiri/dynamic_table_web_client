@@ -9,15 +9,22 @@ import TableService from "../service/TableService.js"
 
 
 const initialState = {
+    
     my_tables: [], // My created tables
     my_tables_filter: [], // My created tables
+
     public_tables: [], // Public tables
     public_table_pending: false, // Table pending
+    
     favorite_tables: [], // Favorite tables
     favorite_tables_filter: [], // Favorite tables
     favorite_table_pending: false, // Favorite table pending
+    
+    delete_table_pending: false, // Delete table pending
+
     front_message: '', // Frontend message
     show_message: -1, // Show message
+    
     table_created:{ // Table created
         pending: false,
         message: '',
@@ -149,12 +156,10 @@ export const tableSlice = createSlice({
                 state.show_message = 1;
                 state.favorite_tables.push(action.payload.data.data);
             }
-
             else{
                 state.front_message = action.payload.data.detail;
                 state.show_message = 0;
             }
-
         })
         
         // Delete from favorites
@@ -255,6 +260,24 @@ export const tableSlice = createSlice({
                 state.fetch_table.table_information.filter_information.error_status = 0;
                 state.fetch_table.table_information.result_information.status = 0
                 state.fetch_table.table_information.filter_information.error_message = action.payload.data.detail;
+            }
+        })
+
+
+        // Delete table
+        builder.addCase(TableService.deleteTable.pending, (state, action) => {
+            state.delete_table_pending = true
+        })
+        builder.addCase(TableService.deleteTable.fulfilled, (state, action) => {
+            if(action.payload.status == 200){
+                state.delete_table_pending = false
+                state.front_message = action.payload.data.message
+                state.show_message = 1
+            }
+            else{
+                state.delete_table_pending = false
+                state.front_message = action.payload.data.message
+                state.show_message = 0
             }
         })
         

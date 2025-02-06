@@ -6,21 +6,20 @@
     2.2 - If user login, show tables side, need to think the algorithm - Stopped
 
 
-2 - Need to add search tab for public tables - Stopped - Short
+2 - Need to add search tab for public tables - Working ON - Short
 
 3 - Need to create new table from creating section with buttons - Stopped - Long
 
 4 - Need to create a new table from code editor - Stopped - Long
 
-5 - Need to update table, add or delet new columns or rows - Stopped - Long
+5 - Need to update table, add or delete new columns or rows - Stopped - Long
 
+6 - Sometimes after executing some code in codeeditor, the queries deleted automatically - Stopped - Short
 
 
 ************************ Back
 
-1 - Need to check who wants to update table - Stopped
-
-2 - Need to create deleta table - Working ON
+1 - Create search query for finding table - Working - Long
 
 
 

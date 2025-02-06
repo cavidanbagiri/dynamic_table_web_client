@@ -16,7 +16,7 @@ function SearchMyTablesAndFavoriteComponent() {
 
 
     return (
-        <div className='flex flex-row items-center justify-between my-2'>
+        <div className='flex flex-row items-center justify-between mt-2 mb-4'>
 
             <input onChange={(e) => dispatch(searchMyTableAndFavoriteTable(e.target.value))} type="text" placeholder='Search' className='px-2 py-1 border border-gray-300 rounded-md outline-none' />
 

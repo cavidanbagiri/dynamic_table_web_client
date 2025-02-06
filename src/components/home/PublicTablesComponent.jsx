@@ -23,9 +23,9 @@ function PublicTablesComponent() {
 
     return (
 
-        <div className=' flex flex-col w-full p-2 ml-3 rounded-md'>
+        <div className=' flex flex-col w-full p-2 ml-3 rounded-md' style={{fontFamily: 'Roboto'}}>
 
-            <h1 className='text-2xl font-medium text-start '>Public Tables</h1>
+            <h1 className='text-3xl font-medium text-start mb-4'>Public Tables</h1>
 
 
             {
@@ -33,14 +33,14 @@ function PublicTablesComponent() {
                     <table>
 
                         <thead>
-                            <tr className='bg-gray-200 text-sm'>
-                                <th className='border border-white w-12 p-2'>Fv</th>
-                                <th className='border border-white max-w-24 p-2 '>S.No</th>
-                                <th className='border border-white w-48'>Table Name</th>
-                                <th className='border border-white'>Description</th>
-                                <th className='border border-white min-w-36'>About</th>
-                                <th className='border border-white min-w-48'>Category</th>
-                                <th className='border border-white max-w-64 min-w-36'>Created By</th>
+                            <tr className='text-sm'>
+                                <th className='font-medium border w-12 p-2'>Fv</th>
+                                <th className='font-medium border max-w-24 p-2 '>S.No</th>
+                                <th className='font-medium border w-48'>Table Name</th>
+                                <th className='font-medium border'>Description</th>
+                                <th className='font-medium border min-w-36'>About</th>
+                                <th className='font-medium border min-w-48'>Category</th>
+                                <th className='font-medium border max-w-64 min-w-36'>Created By</th>
                             </tr>
                         </thead>
                         <tbody>

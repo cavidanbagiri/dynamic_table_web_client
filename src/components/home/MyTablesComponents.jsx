@@ -6,22 +6,23 @@ import { useEffect } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { useNavigate } from 'react-router-dom'
-
-import { FaTable } from "react-icons/fa";
+import { setShowMessageInitial } from '../../store/table_store';
 
 import TableService from '../../service/TableService';
 
 import SearchMyTablesAndFavoriteComponent from './SearchMyTablesAndFavoriteComponent';
+import MyTablesEachTableComponent from './MyTablesEachTableComponent';
+import MessageBox from '../common/MessageBox';
 
 function MyTablesComponents() {
 
   const dispatch = useDispatch();
 
+
   const is_auth = useSelector((state) => state.loginRegisterSlice.is_auth);
   const my_tables_filter = useSelector((state) => state.tableSlice.my_tables_filter);
+  const show_message = useSelector((state) => state.tableSlice.show_message);
 
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (is_auth === true) {
@@ -29,8 +30,26 @@ function MyTablesComponents() {
     }
   }, [is_auth, dispatch]);
 
+  useEffect(() => {
+    if (show_message === 1 || show_message === 0) {
+      setTimeout(() => {
+        dispatch(setShowMessageInitial());
+        dispatch(TableService.fetchMyTables());
+      }, 1500);
+    }
+  }, [show_message, dispatch]);
+
   return (
     <>
+
+      {
+        show_message === 1 ? (
+          <MessageBox message={'Table Deleted Successfully'} color={'bg-green-500'} />
+        ) : show_message === 0 ? (
+          <MessageBox message={'Table Delete Failed'} color={'bg-red-500'} />
+        ) : null
+      }
+
 
       {
         is_auth &&
@@ -38,9 +57,10 @@ function MyTablesComponents() {
 
           <div className='flex flex-col items-start'>
 
-            <span className='text-xl font-medium '>My Tables</span>
 
             <SearchMyTablesAndFavoriteComponent />
+
+            <span className='text-xl font-medium '>My Tables</span>
 
             {
               my_tables_filter.length > 0 ?
@@ -49,22 +69,12 @@ function MyTablesComponents() {
                   {
                     my_tables_filter.map((table, index) => {
                       return (
-                        <div onClick={() => {
-                          navigate(`/table/${table.original_table_name}`);
-                          dispatch(TableService.fetchTableByName(table.original_table_name));
-                        }}
-                        className='flex flex-col items-start p-2 mt-1 mr-2 rounded-md hover:bg-gray-100 cursor-pointer ' key={index}>
-                          <span
-                            className='flex  flex-row items-center text-sm '>
-                              <FaTable className='text-sm mr-1 text-green-500 '/>
-                              {table.table_name}
-                          </span>
-                        </div>
+                        <MyTablesEachTableComponent table={table} key={index} />
                       )
                     })
                   }
-                
-                  
+
+
 
                 </div>
                 :
