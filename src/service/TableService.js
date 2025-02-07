@@ -162,24 +162,42 @@ class TableService {
     )
 
 
-    // Working On
+    // Checked
     static deleteTable = createAsyncThunk(
         'table/deletetable/:table_name',
         async (table_name) => {
             let data = {};
             await $api.delete(`/table/deletetable/${table_name}`)
                 .then((response) => {
-                    console.log('coming response id ', response);
                     data.data = response.data;
                     data.status = response.status;
                 }).catch((err) => {
-                    console.log('coming error is ',err);
                     data.data = err.response.data;
                     data.status = err.response.status;
                 })
             return data;
         }
     )
+
+
+    // Checked
+    static searchPublicTables = createAsyncThunk(
+        'table/searchpublictable?search_keyword',
+        async (keyword) => {
+            let data = {};
+            await $api.get(`/table/searchpublictable?search_keyword=${keyword}`)
+                .then((response) => {
+                    data.data = response.data;
+                    data.status = response.status;
+                }).catch((err) => {
+                    data.data = err.response.data;
+                    data.status = err.response.status;
+                })
+            return data;
+        }
+    )
+
+
 
 }
 

@@ -24,7 +24,7 @@ const initialState = {
 
     front_message: '', // Frontend message
     show_message: -1, // Show message
-    
+
     table_created:{ // Table created
         pending: false,
         message: '',
@@ -278,6 +278,21 @@ export const tableSlice = createSlice({
                 state.delete_table_pending = false
                 state.front_message = action.payload.data.message
                 state.show_message = 0
+            }
+        })
+        
+
+        // Search Public Tables
+        builder.addCase(TableService.searchPublicTables.pending, (state, action) => {
+            state.public_table_pending = true
+        })
+        builder.addCase(TableService.searchPublicTables.fulfilled, (state, action) => {
+            if (action.payload.status == 200) {
+                state.public_tables = action.payload.data;
+                state.public_table_pending = false
+            }
+            else {
+                state.public_table_pending = false
             }
         })
         

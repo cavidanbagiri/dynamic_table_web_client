@@ -16,7 +16,6 @@ function Home() {
 
             </div>
 
-
             <PublicTablesComponent />
 
         </div>

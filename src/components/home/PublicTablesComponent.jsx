@@ -15,6 +15,8 @@ function PublicTablesComponent() {
     const public_tables = useSelector((state) => state.tableSlice.public_tables);
     const public_table_pending = useSelector((state) => state.tableSlice.public_table_pending);
 
+    const [search_keyword, setSearchKeyword] = React.useState('');
+
 
     useEffect(() => {
         const user_id = localStorage.getItem('id');
@@ -22,10 +24,18 @@ function PublicTablesComponent() {
     }, []);
 
     return (
-
         <div className=' flex flex-col w-full p-2 ml-3 rounded-md' style={{fontFamily: 'Roboto'}}>
 
-            <h1 className='text-3xl font-medium text-start mb-4'>Public Tables</h1>
+            <div className='mb-4 flex flex-row justify-between'>
+                <h1 className='text-3xl font-medium text-start'>Public Tables</h1>
+                <div className='mr-5'>
+                    <input onChange={(e) => setSearchKeyword(e.target.value)} type="text" placeholder='Search' className='w-96 px-2 py-2 text-sm border border-gray-400 rounded-md outline-none' />
+                    <button onClick={() => {
+                        dispatch(TableService.searchPublicTables(search_keyword))
+                    }}
+                    className='py-2 px-4 ml-2 text-sm border border-gray-400 rounded-md bg-gray-100 hover:bg-gray-200 duration-200'>Search</button>
+                </div>
+            </div>
 
 
             {
