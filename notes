@@ -25,8 +25,6 @@
 
 1 - Fetcing data from backend happened two times when l click button from homepage - Stopped
 
-2 - When try to filter table with headers as excel, float or int doesnt work, instead of these, string is working - Stopped - Short _____
-
 
 
 ************************ Design

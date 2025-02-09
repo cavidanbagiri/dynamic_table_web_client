@@ -22,6 +22,9 @@ function TableBodyComponent() {
                                     if (key === 'id') {
                                         return null; 
                                     }
+                                    else if(key === 'total_rows'){
+                                        return null
+                                    }
                                     return (
                                         <td key={cellIndex} className='border border-gray-200 p-1 text-xs'>
                                             {row[key]}
