@@ -14,8 +14,6 @@
 
 5 - Need to update table, add or delete new columns or rows - Stopped - Long
 
-6 - Sometimes after executing some code in codeeditor, the queries deleted automatically - Working ON - Short
-
 
 
 ************************ Back
@@ -26,6 +24,8 @@
 ************************ Bugs
 
 1 - Fetcing data from backend happened two times when l click button from homepage - Stopped
+
+2 - When try to filter table with headers as excel, float or int doesnt work, instead of these, string is working - Stopped - Short _____
 
 
 
