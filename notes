@@ -2,8 +2,7 @@
 ************************ Front
 
 1 - Show Table headers and datas in frontend - Stopped
-    2.1 - Show headers in frontend, if user wants, can show or hide then headers - Stopped
-    2.2 - If user login, show tables side, need to think the algorithm - Stopped
+    1.1 - Show headers in frontend, if user wants, can show or hide then headers - Stopped
 
 
 7 - Add Username and profile image to home page - Stopped - Short
@@ -18,12 +17,14 @@
 
 ************************ Back
 
+1 - Add tables_definistions section default table status as public - Stopped
 
 
 
 ************************ Bugs
 
 1 - Fetcing data from backend happened two times when l click button from homepage - Stopped
+
 
 
 

@@ -34,6 +34,7 @@ function MainTable() {
       {
         tablename  ?
           <>
+
             <TableInformationComponent />
             <TableFilterExecuteComponent />
             <span className='text-start text-2xl font-medium mt-4'>Table Result</span>

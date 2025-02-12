@@ -60,7 +60,11 @@ function CodeEditor() {
 
     useEffect(() => {
         if (fetch_table.headers) {
-            setHeaders(fetch_table.headers);
+            const temp = []
+            for (let i of fetch_table.headers) {
+                temp.push(i.key)
+            }
+            setHeaders(temp);
         }
     }, [fetch_table.headers]);
 

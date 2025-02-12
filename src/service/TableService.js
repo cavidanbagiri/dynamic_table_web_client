@@ -150,7 +150,6 @@ class TableService {
             let data = {};
             await $api.post(`/table/query`, {sql_query})
                 .then((response) => {  
-                    console.log(response);
                     data.data = response.data;
                     data.status = response.status;
                 }).catch((err) => {

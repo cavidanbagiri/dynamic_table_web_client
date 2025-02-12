@@ -9,38 +9,38 @@ import TableService from "../service/TableService.js"
 
 
 const initialState = {
-    
+
     my_tables: [], // My created tables
     my_tables_filter: [], // My created tables
 
     public_tables: [], // Public tables
     public_table_pending: false, // Table pending
-    
+
     favorite_tables: [], // Favorite tables
     favorite_tables_filter: [], // Favorite tables
     favorite_table_pending: false, // Favorite table pending
-    
+
     delete_table_pending: false, // Delete table pending
 
     front_message: '', // Frontend message
     show_message: -1, // Show message
 
-    table_created:{ // Table created
+    table_created: { // Table created
         pending: false,
         message: '',
     },
-    fetch_table:{
+    fetch_table: {
         table_info: [], // For fething table data
         headers: [], // Get Table Headers
         filter_header_query: '?',
         filter_header_query_dict: {},
         pending: false,
-        table_information:{
+        table_information: {
             total_rows: 0,
             total_columns: 0,
             table_size: 0,
             original_table_name: '',
-            filter_information:{
+            filter_information: {
                 pending: false,
                 total_rows: 0,
                 execution_time: 0,
@@ -48,12 +48,12 @@ const initialState = {
                 error_status: -1,
                 error_message: '',
             },
-            result_information:{ 
+            result_information: {
                 status: -1,
             }
         }
     },
-    
+
 }
 
 export const tableSlice = createSlice({
@@ -66,10 +66,10 @@ export const tableSlice = createSlice({
         },
 
         updateFilterHeaderQuery: (state, action) => {
-            
-            if(action.payload.value == ''){
+
+            if (action.payload.value == '') {
                 delete state.fetch_table.filter_header_query_dict[action.payload.key];
-            }else{
+            } else {
                 state.fetch_table.filter_header_query_dict[action.payload.key] = action.payload.value;
             }
 
@@ -108,12 +108,23 @@ export const tableSlice = createSlice({
             state.favorite_tables_filter = state.favorite_tables.filter((table) => {
                 return table.table_name.toLowerCase().includes(action.payload.toLowerCase())
             })
+        },
+
+        // Change Header condition
+        changeHeaderCondition: (state, action) => {
+            state.fetch_table.headers = state.fetch_table.headers.map((header) => {
+                if (header.key === action.payload.key) {
+                    header.value = action.payload.value;
+                }
+                return header;
+            });
         }
+
 
     },
 
     extraReducers: (builder) => {
-        
+
 
         // Show Public tables
         builder.addCase(TableService.getPublicTables.pending, (state, action) => {
@@ -156,12 +167,12 @@ export const tableSlice = createSlice({
                 state.show_message = 1;
                 state.favorite_tables.push(action.payload.data.data);
             }
-            else{
+            else {
                 state.front_message = action.payload.data.detail;
                 state.show_message = 0;
             }
         })
-        
+
         // Delete from favorites
         builder.addCase(TableService.deleteFromFavorites.fulfilled, (state, action) => {
             if (action.payload.status == 201) {
@@ -169,24 +180,24 @@ export const tableSlice = createSlice({
                 state.show_message = 1;
                 state.favorite_tables = state.favorite_tables.filter((table) => table.id !== action.payload.data.id);
             }
-            else{
+            else {
                 state.front_message = action.payload.data.message;
                 state.show_message = 0;
             }
         })
-        
+
 
         // Create table
         builder.addCase(TableService.createTable.pending, (state, action) => {
             state.table_created.pending = true;
         })
         builder.addCase(TableService.createTable.fulfilled, (state, action) => {
-            if(action.payload.status == 201){
+            if (action.payload.status == 201) {
                 state.table_created.message = 'Table created successfully';
                 state.table_created.pending = false;
                 state.show_message = 1;
             }
-            else{
+            else {
                 state.table_created.message = action.payload.data.detail;
                 state.table_created.pending = false;
                 state.show_message = 0;
@@ -199,11 +210,12 @@ export const tableSlice = createSlice({
             state.fetch_table.pending = true
         })
         builder.addCase(TableService.fetchTableByName.fulfilled, (state, action) => {
-            if(action.payload.status == 200){
+            if (action.payload.status == 200) {
+
+                
                 state.fetch_table.pending = false
                 state.fetch_table.table_info = action.payload.data.data;
                 state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
-                state.fetch_table.headers = action.payload.data.headers;
                 state.fetch_table.table_information.total_rows = action.payload.data.total_rows;
                 state.fetch_table.table_information.total_columns = action.payload.data.total_columns;
                 state.fetch_table.table_information.table_size = action.payload.data.table_size;
@@ -211,8 +223,25 @@ export const tableSlice = createSlice({
                 state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
                 state.fetch_table.table_information.filter_information.error_status = 1
                 state.fetch_table.table_information.result_information.status = 1
+                
+                // state.fetch_table.headers = action.payload.data.headers;
+                
+                // Initialize headers as an array if it doesn't exist
+                state.fetch_table.headers = [];
+                if (!state.fetch_table.headers) {
+                    state.fetch_table.headers = [];
+                }
+                // Add headers to the state
+                for (let headerName of action.payload.data.headers) {
+                    const header = {
+                        key: headerName,
+                        value: true
+                    };
+                    state.fetch_table.headers.push(header); // Add header to the array
+                }
+
             }
-            else{
+            else {
                 state.fetch_table.pending = false
                 state.fetch_table.table_information.filter_information.error_status = 0;
                 state.fetch_table.table_information.result_information.status = 0
@@ -226,14 +255,27 @@ export const tableSlice = createSlice({
             state.fetch_table.table_information.filter_information.pending = true
         })
         builder.addCase(TableService.filterTableByHeaders.fulfilled, (state, action) => {
-            if(action.payload.status == 200){
+            if (action.payload.status == 200) {
                 state.fetch_table.table_information.filter_information.pending = false
                 state.fetch_table.table_info = action.payload.data.data;
-                state.fetch_table.headers = action.payload.data.headers;
+                // state.fetch_table.headers = action.payload.data.headers;
+                // Initialize headers as an array if it doesn't exist
+                state.fetch_table.headers = [];
+                if (!state.fetch_table.headers) {
+                    state.fetch_table.headers = [];
+                }
+                // Add headers to the state
+                for (let headerName of action.payload.data.headers) {
+                    const header = {
+                        key: headerName,
+                        value: true
+                    };
+                    state.fetch_table.headers.push(header); // Add header to the array
+                }
                 state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
                 state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
             }
-            else{
+            else {
                 state.fetch_table.table_information.filter_information.pending = false
                 state.fetch_table.table_information.filter_information.error_status = 0;
                 state.fetch_table.table_info = [];
@@ -246,16 +288,29 @@ export const tableSlice = createSlice({
             state.fetch_table.table_information.filter_information.pending = true
         })
         builder.addCase(TableService.filterTableByQuery.fulfilled, (state, action) => {
-            if(action.payload.status == 200){
+            if (action.payload.status == 200) {
                 state.fetch_table.table_information.filter_information.pending = false
-                state.fetch_table.table_info = action.payload.data.data;     
-                state.fetch_table.headers = action.payload.data.headers;
-                state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;  
+                state.fetch_table.table_info = action.payload.data.data;
+                // state.fetch_table.headers = action.payload.data.headers;
+                // Initialize headers as an array if it doesn't exist
+                state.fetch_table.headers = [];
+                if (!state.fetch_table.headers) {
+                    state.fetch_table.headers = [];
+                }
+                // Add headers to the state
+                for (let headerName of action.payload.data.headers) {
+                    const header = {
+                        key: headerName,
+                        value: true
+                    };
+                    state.fetch_table.headers.push(header); // Add header to the array
+                }
+                state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
                 state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
                 state.fetch_table.table_information.filter_information.error_status = 1
                 state.fetch_table.table_information.result_information.status = 1
             }
-            else{
+            else {
                 state.fetch_table.table_information.filter_information.pending = false;
                 state.fetch_table.table_information.filter_information.error_status = 0;
                 state.fetch_table.table_information.result_information.status = 0
@@ -269,18 +324,18 @@ export const tableSlice = createSlice({
             state.delete_table_pending = true
         })
         builder.addCase(TableService.deleteTable.fulfilled, (state, action) => {
-            if(action.payload.status == 200){
+            if (action.payload.status == 200) {
                 state.delete_table_pending = false
                 state.front_message = action.payload.data.message
                 state.show_message = 1
             }
-            else{
+            else {
                 state.delete_table_pending = false
                 state.front_message = action.payload.data.message
                 state.show_message = 0
             }
         })
-        
+
 
         // Search Public Tables
         builder.addCase(TableService.searchPublicTables.pending, (state, action) => {
@@ -295,13 +350,13 @@ export const tableSlice = createSlice({
                 state.public_table_pending = false
             }
         })
-        
+
 
     }
 })
 
 export const { setShowMessageInitial, updateFilterHeaderQuery, clearFilterHeaderQuery, setFilterSQLQueryStatusInitial, setFilterSQLQueryStatusForFailed,
-    setFilterSQLQueryResultStatusInitial, searchMyTableAndFavoriteTable
- } = tableSlice.actions
+    setFilterSQLQueryResultStatusInitial, searchMyTableAndFavoriteTable, changeHeaderCondition
+} = tableSlice.actions
 
 export default tableSlice.reducer
