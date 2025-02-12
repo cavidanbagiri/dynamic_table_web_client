@@ -224,9 +224,6 @@ export const tableSlice = createSlice({
                 state.fetch_table.table_information.filter_information.error_status = 1
                 state.fetch_table.table_information.result_information.status = 1
                 
-                // state.fetch_table.headers = action.payload.data.headers;
-                
-                // Initialize headers as an array if it doesn't exist
                 state.fetch_table.headers = [];
                 if (!state.fetch_table.headers) {
                     state.fetch_table.headers = [];
@@ -258,20 +255,6 @@ export const tableSlice = createSlice({
             if (action.payload.status == 200) {
                 state.fetch_table.table_information.filter_information.pending = false
                 state.fetch_table.table_info = action.payload.data.data;
-                // state.fetch_table.headers = action.payload.data.headers;
-                // Initialize headers as an array if it doesn't exist
-                state.fetch_table.headers = [];
-                if (!state.fetch_table.headers) {
-                    state.fetch_table.headers = [];
-                }
-                // Add headers to the state
-                for (let headerName of action.payload.data.headers) {
-                    const header = {
-                        key: headerName,
-                        value: true
-                    };
-                    state.fetch_table.headers.push(header); // Add header to the array
-                }
                 state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
                 state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
             }
@@ -291,8 +274,11 @@ export const tableSlice = createSlice({
             if (action.payload.status == 200) {
                 state.fetch_table.table_information.filter_information.pending = false
                 state.fetch_table.table_info = action.payload.data.data;
-                // state.fetch_table.headers = action.payload.data.headers;
-                // Initialize headers as an array if it doesn't exist
+                state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
+                state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
+                state.fetch_table.table_information.filter_information.error_status = 1
+                state.fetch_table.table_information.result_information.status = 1
+                
                 state.fetch_table.headers = [];
                 if (!state.fetch_table.headers) {
                     state.fetch_table.headers = [];
@@ -305,10 +291,6 @@ export const tableSlice = createSlice({
                     };
                     state.fetch_table.headers.push(header); // Add header to the array
                 }
-                state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
-                state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
-                state.fetch_table.table_information.filter_information.error_status = 1
-                state.fetch_table.table_information.result_information.status = 1
             }
             else {
                 state.fetch_table.table_information.filter_information.pending = false;
