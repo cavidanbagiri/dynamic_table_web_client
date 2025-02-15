@@ -54,6 +54,14 @@ const initialState = {
         }
     },
 
+    create_table_from_ready_components:{
+        pending: false,
+        tableName: '',
+        category: '',
+        description: '',
+        columns: [],
+    }
+
 }
 
 export const tableSlice = createSlice({
@@ -330,6 +338,24 @@ export const tableSlice = createSlice({
             }
             else {
                 state.public_table_pending = false
+            }
+        })
+
+
+        // Create table from ready components
+        builder.addCase(TableService.createTableFromReadyComponents.pending, (state, action) => {
+            state.create_table_pending = true
+        })
+        builder.addCase(TableService.createTableFromReadyComponents.fulfilled, (state, action) => {
+            if (action.payload.status == 200) {
+                state.table_created.pending = false
+                state.table_created.message = "Table created successfully"
+                state.show_message = 1
+            }
+            else {
+                state.table_created.pending = false
+                state.table_created.message = action.payload.data.detail
+                state.show_message = 0
             }
         })
 

@@ -197,6 +197,24 @@ class TableService {
     )
 
 
+    // Working On
+    static createTableFromReadyComponents = createAsyncThunk(
+        'table/createtablefromcomponents',
+        async (table_info) => {
+            let data = {};
+            await $api.post(`/table/createtablefromcomponents`, table_info)
+                .then((response) => {
+                    data.data = response.data;
+                    data.status = response.status;
+                }).catch((err) => {
+                    data.data = err.response.data;
+                    data.status = err.response.status;
+                })
+            return data;
+        }
+    )
+
+
 
 }
 

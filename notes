@@ -1,24 +1,16 @@
 
 ************************ Front
 
-1 - Show Table headers and datas in frontend - Stopped
-    1.1 - Show headers in frontend, if user wants, can show or hide then headers - Stopped
+1 - If user select default tables as table definitions or user_tables, must be an error - Stopped - Long
 
+2 - Add Username and profile image to home page - Stopped - Short
 
-7 - Add Username and profile image to home page - Stopped - Short
+3 - Need to create a new table from code editor - Stopped - Long
 
-3 - Need to create new table from creating section with buttons - Stopped - Long
-
-4 - Need to create a new table from code editor - Stopped - Long
-
-5 - Need to update table, add or delete new columns or rows - Stopped - Long
-
+4 - Need to update table, add or delete new columns or rows - Stopped - Long
 
 
 ************************ Back
-
-1 - Add tables_definistions section default table status as public - Stopped
-
 
 
 ************************ Bugs
@@ -37,3 +29,5 @@
 ************************ Future
 
 1 - Need To show, how many percent of data is ready - Stopped
+
+2 - If user not login, must can see all public tables and can be work with tables - Stopped
