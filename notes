@@ -10,7 +10,11 @@
 4 - Need to update table, add or delete new columns or rows - Stopped - Long
 
 
+
 ************************ Back
+
+
+
 
 
 ************************ Bugs
@@ -22,7 +26,6 @@
 
 ************************ Design
 
-1 - Need to fix design table page after user login - Stopped - Short  
 
 
 
@@ -31,3 +34,5 @@
 1 - Need To show, how many percent of data is ready - Stopped
 
 2 - If user not login, must can see all public tables and can be work with tables - Stopped
+
+3 - Enter the website with google login - Stopped

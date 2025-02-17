@@ -65,7 +65,9 @@ export default function FavoritTables() {
                                         <FavoriteIconComponent  table_id={table.id} rule={'delete'} />
 
                                         <span className='text-sm'>
-                                            {table.table_name.replace('_', ' ')}
+                                            <div className='line-clamp-1 overflow-hidden overflow-ellipsis'>
+                                                {table.table_name.replace('_', ' ')}
+                                            </div>
                                         </span>
                                     </div>
                                 ))

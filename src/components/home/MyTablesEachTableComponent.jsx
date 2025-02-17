@@ -31,9 +31,11 @@ function MyTablesEachTableComponent({ table, index }) {
             <div
                 className='flex flex-row items-center justify-between w-full'>
                 <span
-                    className='flex flex-row items-center text-sm '>
+                    className='flex flex-row items-center text-sm  '>
                     <FaTable className='text-sm mr-1 text-green-500 ' />
+                    <div className='line-clamp-1 overflow-hidden overflow-ellipsis max-w-full'>
                     {table.table_name}
+                    </div>
                 </span>
                 <div className='relative z-10 '>
                     <CiSettings onClick={

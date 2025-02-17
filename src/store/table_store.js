@@ -173,7 +173,7 @@ export const tableSlice = createSlice({
             if (action.payload.status == 201) {
                 state.front_message = action.payload.data.message;
                 state.show_message = 1;
-                state.favorite_tables.push(action.payload.data.data);
+                state.favorite_tables_filter.push(action.payload.data.data);
             }
             else {
                 state.front_message = action.payload.data.detail;
@@ -186,7 +186,7 @@ export const tableSlice = createSlice({
             if (action.payload.status == 201) {
                 state.front_message = action.payload.data.message;
                 state.show_message = 1;
-                state.favorite_tables = state.favorite_tables.filter((table) => table.id !== action.payload.data.id);
+                state.favorite_tables_filter = state.favorite_tables_filter.filter((table) => table.id !== action.payload.data.id);
             }
             else {
                 state.front_message = action.payload.data.message;

@@ -36,10 +36,10 @@ function FavoriteIconComponent({ table_id, rule }) {
         <>
 
             <div
-                onClick={() => {
+                onClick={(e) => {
+                    e.stopPropagation();
                     if (is_auth === true) {
                         setCond(!cond);
-
                         if (rule === 'add') {
                             dispatch(TableService.addToFavorites(table_id));
                         }
@@ -69,7 +69,6 @@ function FavoriteIconComponent({ table_id, rule }) {
                 }}
                 className='w-8 h-8 flex items-center justify-center rounded-full cursor-pointer border-white'
             >
-
 
                 {cond ? (
                     <FaStar className='text-lg text-yellow-300 m-auto ' />
