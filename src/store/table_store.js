@@ -237,12 +237,14 @@ export const tableSlice = createSlice({
                     state.fetch_table.headers = [];
                 }
                 // Add headers to the state
-                for (let headerName of action.payload.data.headers) {
-                    const header = {
-                        key: headerName,
-                        value: true
-                    };
-                    state.fetch_table.headers.push(header); // Add header to the array
+                if (action.payload.data.headers) {
+                    for (let headerName of action.payload.data.headers) {
+                        const header = {
+                            key: headerName,
+                            value: true
+                        };
+                        state.fetch_table.headers.push(header); // Add header to the array
+                    }
                 }
 
             }
@@ -292,12 +294,14 @@ export const tableSlice = createSlice({
                     state.fetch_table.headers = [];
                 }
                 // Add headers to the state
-                for (let headerName of action.payload.data.headers) {
-                    const header = {
-                        key: headerName,
-                        value: true
-                    };
-                    state.fetch_table.headers.push(header); // Add header to the array
+                if (action.payload.data.headers) {
+                    for (let headerName of action.payload.data.headers) {
+                        const header = {
+                            key: headerName,
+                            value: true
+                        };
+                        state.fetch_table.headers.push(header); // Add header to the array
+                    }
                 }
             }
             else {
@@ -344,7 +348,7 @@ export const tableSlice = createSlice({
 
         // Create table from ready components
         builder.addCase(TableService.createTableFromReadyComponents.pending, (state, action) => {
-            state.create_table_pending = true
+            state.table_created.pending = true
         })
         builder.addCase(TableService.createTableFromReadyComponents.fulfilled, (state, action) => {
             if (action.payload.status == 200) {

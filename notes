@@ -1,25 +1,26 @@
 
 ************************ Front
 
-1 - If user select default tables as table definitions or user_tables, must be an error - Stopped - Long
+1 - Add Username and profile image to home page - Stopped - Short
 
-2 - Add Username and profile image to home page - Stopped - Short
+2 - Need to create a new table from code editor - Stopped - Long
 
-3 - Need to create a new table from code editor - Stopped - Long
+3 - Need to update table, add or delete new columns or rows - Stopped - Long
 
-4 - Need to update table, add or delete new columns or rows - Stopped - Long
+4 - Without at least one table in codeeditor side, user can't work with tables, Need to fix it - Stopped - Long
+
 
 
 
 ************************ Back
 
-
+1 - Check table name, if not exists return to frontend table is not available - Stopped - Short
 
 
 
 ************************ Bugs
 
-1 - Fetcing data from backend happened two times when l click button from homepage - Stopped
+1 - Fetcing data from backend happened two times when l click button from homepage - Stopped - Short
 
 
 
@@ -36,3 +37,5 @@
 2 - If user not login, must can see all public tables and can be work with tables - Stopped
 
 3 - Enter the website with google login - Stopped
+
+4 - need to check, the sqlparse already has inside of requirements.txt in github - Stopped *******************************************
