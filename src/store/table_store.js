@@ -281,11 +281,13 @@ export const tableSlice = createSlice({
             state.fetch_table.table_information.filter_information.pending = true
         })
         builder.addCase(TableService.filterTableByQuery.fulfilled, (state, action) => {
+            console.log(' object ', action.payload);
             if (action.payload.status == 200) {
                 state.fetch_table.table_information.filter_information.pending = false
-                state.fetch_table.table_info = action.payload.data.data;
-                state.fetch_table.table_information.filter_information.total_rows = action.payload.data.total_rows;
-                state.fetch_table.table_information.filter_information.execution_time = action.payload.data.execution_time;
+                state.fetch_table.table_info = action.payload?.data?.data;
+                state.fetch_table.table_information.original_table_name = action.payload?.data?.original_table_name;
+                state.fetch_table.table_information.filter_information.total_rows = action.payload?.data?.total_rows;
+                state.fetch_table.table_information.filter_information.execution_time = action.payload?.data?.execution_time;
                 state.fetch_table.table_information.filter_information.error_status = 1
                 state.fetch_table.table_information.result_information.status = 1
                 
@@ -294,8 +296,8 @@ export const tableSlice = createSlice({
                     state.fetch_table.headers = [];
                 }
                 // Add headers to the state
-                if (action.payload.data.headers) {
-                    for (let headerName of action.payload.data.headers) {
+                if (action.payload?.data?.headers) {
+                    for (let headerName of action.payload?.data?.headers) {
                         const header = {
                             key: headerName,
                             value: true
@@ -305,10 +307,11 @@ export const tableSlice = createSlice({
                 }
             }
             else {
+                console.log('enter here');
                 state.fetch_table.table_information.filter_information.pending = false;
-                state.fetch_table.table_information.filter_information.error_status = 0;
-                state.fetch_table.table_information.result_information.status = 0
                 state.fetch_table.table_information.filter_information.error_message = action.payload.data.detail;
+                state.fetch_table.table_information.filter_information.error_status = 0
+                state.fetch_table.table_information.result_information.status = 0
             }
         })
 

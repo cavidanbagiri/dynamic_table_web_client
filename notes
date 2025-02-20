@@ -7,14 +7,14 @@
 
 3 - Need to update table, add or delete new columns or rows - Stopped - Long
 
-4 - Without at least one table in codeeditor side, user can't work with tables, Need to fix it - Stopped - Long
+4 - Without at least one table in codeeditor side, user can't work with tables, Need to fix it - Working on - Long
 
 
 
 
 ************************ Back
 
-1 - Check table name, if not exists return to frontend table is not available - Stopped - Short
+1 - Need to close all of the functions from query where name is schema_information - Stopped - Short
 
 
 
@@ -26,6 +26,8 @@
 
 
 ************************ Design
+
+1 - Set my tables  and favorite tables also for table page, suggest same can use in both home and table page - Stopped - Short
 
 
 

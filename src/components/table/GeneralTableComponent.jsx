@@ -8,7 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import TableService from '../../service/TableService';
 import CodeEditor from './CodeEditor';
+import MessageBox from '../common/MessageBox';
 import PublicTablesComponent from '../home/PublicTablesComponent';
+import { setFilterSQLQueryResultStatusInitial } from '../../store/table_store';
+import { setFilterSQLQueryStatusInitial } from '../../store/table_store';
 
 
 
@@ -21,35 +24,27 @@ function GeneralTableComponent() {
     const favorite_tables = useSelector(state => state.tableSlice.favorite_tables);
     const my_tables = useSelector(state => state.tableSlice.my_tables);
 
-
+    useEffect(() => {
+        if (fetch_table.table_information.filter_information.error_status == 0) {
+            setTimeout(() => {
+                dispatch(setFilterSQLQueryStatusInitial());
+            }, 6000)
+        }
+    }, [fetch_table]);
 
     return (
         <div className='flex flex-col'>
+
+            {
+                fetch_table.table_information.filter_information.error_status == 0 &&
+                <MessageBox message={fetch_table.table_information.filter_information.error_message} color={'bg-red-500'} />
+            }
+
 
             <div className='flex flex-row h-96 '>
 
                 <div className="flex flex-col text-start w-48  p-2 m-2 border border-gray-300 rounded-md">
 
-                    {/* <span className="text-xs text-gray-500 text-center">Favorites</span>
-
-                    <div className="flex flex-col justify-start items-start my-2 ">
-
-                        {
-                            favorite_tables.map((table, index) => (
-                                <span key={index}
-                                    onClick={() => {
-                                        navigate(`/table/${table.original_table_name}`);
-                                        dispatch(TableService.fetchTableByName(table.original_table_name));
-                                    }}
-                                    className="py-1 flex flex-row items-center rounded-md hover:bg-gray-100 cursor-pointer mx-1 border p-1">
-                                    <CiViewTable />
-                                    <span className="text-xs ml-2 ">
-                                        {table.table_name}
-                                    </span>
-                                </span>
-                            ))
-                        }
-                    </div> */}
 
                     <span className="text-sm text-gray-500 text-center font-medium">My tables</span>
 

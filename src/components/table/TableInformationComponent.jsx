@@ -25,7 +25,7 @@ function TableInformationComponent() {
     if (fetch_table.table_information.filter_information.error_status == 0) {
       setTimeout(() => {
         dispatch(setFilterSQLQueryStatusInitial());
-      }, 3000)
+      }, 6000)
     }
   }, [fetch_table]);
 
@@ -33,7 +33,7 @@ function TableInformationComponent() {
     if (fetch_table.table_information.result_information.status == 1) {
       setTimeout(() => {
         dispatch(setFilterSQLQueryResultStatusInitial());
-      }, 3000)
+      }, 6000)
     }
   }, [fetch_table]);
 
