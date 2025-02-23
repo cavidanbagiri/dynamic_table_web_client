@@ -13,54 +13,40 @@ import TableFilterExecuteComponent from '../components/table/TableFilterExecuteC
 import TableInformationComponent from '../components/table/TableInformationComponent';
 import TableSkeleton from '../components/common/TableSkeleton';
 import GeneralTableComponent from '../components/table/GeneralTableComponent';
+import TableResultInformationComponent from '../components/table/TableResultInformationComponent'
+import MyFolderComponent from '../components/common/MyFolderComponent';
 
 function MainTable() {
 
   const { tablename } = useParams();
-  
+
   const dispatch = useDispatch();
 
-  const fetch_table = useSelector((state) => state.tableSlice.fetch_table);
+  // const fetch_table = useSelector((state) => state.tableSlice.fetch_table);
 
   useEffect(() => {
-    if(tablename){
+    if (tablename) {
       dispatch(TableService.fetchTableByName(tablename));
     }
   }, [tablename]);
 
 
   return (
-    <div className='flex flex-col '>
-      {
-        tablename  ?
-          <>
+      <div className='flex flex-col relative'>
+        <MyFolderComponent />
+        {
+          tablename ?
+            <>
 
-            <TableInformationComponent />
-            <TableFilterExecuteComponent />
-            <span className='text-start text-2xl font-medium mt-4'>Table Result</span>
-            <table className='w-full'>
-              <TableHeaderComponent />
-              {
-                !fetch_table.pending && !fetch_table.table_information.filter_information.pending ?
+              <TableInformationComponent />
+              <TableFilterExecuteComponent />
+              <TableResultInformationComponent />
 
-                  <TableBodyComponent />
-
-                  : null
-              }
-            </table>
-            {
-              fetch_table.pending || fetch_table.table_information.filter_information.pending ?
-
-                <TableSkeleton />
-
-                : null
-            }
-
-          </>
-          : 
-          <GeneralTableComponent/>
-      }
-    </div>
+            </>
+            :
+            <GeneralTableComponent />
+        }
+      </div>
   )
 }
 

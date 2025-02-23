@@ -80,7 +80,7 @@ function CodeEditor() {
 
 
     return (
-        <div style={{ fontFamily: "JetBrains Mono", ...textareaStyle }} className='flex flex-row w-full rounded-md my-2 outline-gray-400 text-sm'>
+        <div  className='flex flex-row w-full rounded-md my-2 outline-gray-400 text-sm'>
             <div className="flex flex-col text-start w-24 p-2 mr-2 border border-gray-300 rounded-md">
                 <button
                     onClick={() => {

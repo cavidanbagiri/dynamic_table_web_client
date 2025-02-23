@@ -55,7 +55,7 @@ function MyTablesComponents() {
         is_auth &&
         <div className='flex flex-col items-start border-b p-2 w-full h-1/2 overflow-hidden overflow-y-auto'>
 
-          <div className='flex flex-col items-start'>
+          <div className='flex flex-col items-start w-full'>
 
 
             <SearchMyTablesAndFavoriteComponent />

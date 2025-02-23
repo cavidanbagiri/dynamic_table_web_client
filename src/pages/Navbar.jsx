@@ -6,12 +6,11 @@ import { Outlet, Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import UserService from '../service/UserService';
-
 import { userLogout } from '../store/login_register_store';
 
-import NavbarItemComponent from '../components/navbar/navbar_item_component'
+import { triggerShowMyTables } from '../store/common_store';
 
+import NavbarItemComponent from '../components/navbar/navbar_item_component'
 
 
 function Navbar() {
@@ -34,6 +33,13 @@ function Navbar() {
                         <Link to='/' onClick={() => {  }}>
                             <NavbarItemComponent iconName={'fa-house'} iconSize={'text-xl'} iconValue={'Home'} />
                         </Link>
+
+                        <div className='cursor-pointer' onClick={() => { 
+                            console.log('clicked');
+                            dispatch(triggerShowMyTables())
+                         }}>
+                            <NavbarItemComponent iconName={'fa-folder'} iconSize={'text-2xl'} iconValue={'Folder'} />
+                        </div>
 
                         <Link to="/table" onClick={() => {  }}>
                             <NavbarItemComponent iconName={'fa-plus'} iconSize={'text-2xl'} iconValue={'Table'} />

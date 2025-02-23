@@ -1,4 +1,6 @@
 
+
+
 ************************ Front
 
 1 - Add Username and profile image to home page - Stopped - Short
@@ -7,14 +9,12 @@
 
 3 - Need to update table, add or delete new columns or rows - Stopped - Long
 
-4 - Without at least one table in codeeditor side, user can't work with tables, Need to fix it - Working on - Long
-
-
 
 
 ************************ Back
 
 1 - Need to close all of the functions from query where name is schema_information - Stopped - Short
+
 
 
 

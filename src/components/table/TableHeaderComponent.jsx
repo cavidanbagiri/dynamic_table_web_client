@@ -24,7 +24,7 @@ function TableHeaderComponent() {
             <thead className='bg-gray-200 text-xs'>
                 {/* First Row: Display Header Names */}
                 <tr>
-                    <th className='border border-white w-24 p-2'>
+                    <th className='border border-white w-12 p-2'>
                         <span>Index</span>
                     </th>
                     {fetch_table?.headers?.map((header) => {
@@ -45,7 +45,7 @@ function TableHeaderComponent() {
 
                 {/* Second Row: Search Inputs */}
                 <tr>
-                    <th className='border border-white w-24 p-2'>
+                    <th className='border border-white w-12 p-2'>
                         <input
                             type="text"
                             placeholder="Search..."

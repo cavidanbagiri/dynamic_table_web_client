@@ -8,6 +8,10 @@ import { CiUser } from "react-icons/ci";
 import { CiLogin } from "react-icons/ci";
 import { CiViewTable } from "react-icons/ci";
 import { CiLogout } from "react-icons/ci";
+import { PiFoldersLight } from "react-icons/pi";
+
+
+
 
 function NavbarItemComponent(props) {
   return (
@@ -15,6 +19,7 @@ function NavbarItemComponent(props) {
             <span>
                 {props.iconValue === 'Home' && <CiHome className={`${props.selected === 'Home' ? 'text-indigo-600 ' : 'text-black'} my-3 text-3xl`} />}
                 {props.iconValue === 'Table' && <CiViewTable className={`${props.selected === 'Table' ? 'text-indigo-600 ' : 'text-black'} my-3 text-3xl`} />}
+                {props.iconValue === 'Folder' && <PiFoldersLight className={`${props.selected === 'Folder' ? 'text-indigo-600 ' : 'text-black'} my-3 text-3xl`} />}
                 {props.iconValue === 'Profile' && <CiUser className={`${props.selected === 'Profile' ? 'text-indigo-600' : 'text-black'} my-3 text-3xl` }/>}
                 {props.iconValue === 'Login' && <CiLogin className={`${props.selected === 'Login' ? 'text-indigo-600' : 'text-black'} my-3 text-3xl` }/>}
                 {props.iconValue === 'Logout' && <CiLogout className={`${props.selected === 'Logout' ? 'text-indigo-600' : 'text-black'} my-3 text-3xl` }/>}
