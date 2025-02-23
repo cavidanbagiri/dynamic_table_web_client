@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 
 import { setShowMessageInitial } from '../../store/table_store';
-
+import { triggerShowMyTables } from '../../store/common_store';
 
 import FavoriteIconComponent from '../common/FavoriteIconComponent';
 import MessageBox from '../common/MessageBox';
@@ -60,7 +60,10 @@ export default function FavoritTables() {
                                 </span>
                                 :
                                 favorite_tables_filter.map((table, index) => (
-                                    <div onClick={() => navigate(`/table/${table.original_table_name}`)} 
+                                    <div onClick={() => {
+                                        navigate(`/table/${table.original_table_name}`)
+                                        dispatch(triggerShowMyTables())
+                                    }} 
                                     className='flex py-1 items-center mt-1 w-full rounded-md hover:bg-gray-100 cursor-pointer' key={index}>
                                         <FavoriteIconComponent  table_id={table.id} rule={'delete'} />
 

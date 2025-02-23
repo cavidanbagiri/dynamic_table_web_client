@@ -10,6 +10,7 @@ import { FiTrash } from "react-icons/fi";
 
 import TableService from '../../service/TableService';
 
+import { triggerShowMyTables } from '../../store/common_store';
 
 function MyTablesEachTableComponent({ table, index }) {
 
@@ -26,6 +27,7 @@ function MyTablesEachTableComponent({ table, index }) {
             onClick={() => {
                 navigate(`/table/${table.original_table_name}`);
                 dispatch(TableService.fetchTableByName(table.original_table_name));
+                dispatch(triggerShowMyTables())
             }}
             className='flex flex-col items-start p-2 mt-1 mr-2 rounded-md  hover:bg-gray-100 cursor-pointer ' key={index}>
             <div
