@@ -15,6 +15,8 @@ function CreateTableFromExcelComponent() {
     const dispatch = useDispatch();
 
     const show_message = useSelector((state) => state.tableSlice.show_message);
+    const front_message = useSelector((state) => state.tableSlice.front_message);
+
     const created_table = useSelector((state) => state.tableSlice.table_created);
 
     const [file, setFile] = useState(null);
@@ -53,7 +55,7 @@ function CreateTableFromExcelComponent() {
         if (show_message === 1 || show_message === 0) {
             setTimeout(() => {
                 dispatch(setShowMessageInitial());
-            }, 10000);
+            }, 3000);
         }
     }, [show_message])
 
@@ -62,9 +64,9 @@ function CreateTableFromExcelComponent() {
         <div className='flex flex-col items-center  text-gray-500  w-80 border border-gray-300 rounded-md'>
 
             {show_message === 1 ? (
-                <MessageBox message={created_table.message} color={'bg-green-500'} />
+                <MessageBox message={front_message} color={'bg-green-500'} />
             ) : show_message === 0 ? (
-                <MessageBox message={created_table.message} color={'bg-red-500'} />
+                <MessageBox message={front_message} color={'bg-red-500'} />
             ) : null}
 
             <span className='text-3xl text-black font-medium my-5'>Create Table</span>

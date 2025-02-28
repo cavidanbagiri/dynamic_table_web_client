@@ -201,14 +201,50 @@ export const tableSlice = createSlice({
         })
         builder.addCase(TableService.createTable.fulfilled, (state, action) => {
             if (action.payload.status == 201) {
-                state.table_created.message = 'Table created successfully';
+                // state.table_created.message = 'Table created successfully';
                 state.table_created.pending = false;
+                state.front_message = 'Table created successfully';
                 state.show_message = 1;
             }
             else {
-                state.table_created.message = action.payload.data.detail;
+                // state.table_created.message = action.payload.data.detail;
                 state.table_created.pending = false;
+                state.front_message = action.payload.data.detail;
                 state.show_message = 0;
+            }
+        })
+
+        // Create table from ready components
+        builder.addCase(TableService.createTableFromReadyComponents.pending, (state, action) => {
+            state.table_created.pending = true
+        })
+        builder.addCase(TableService.createTableFromReadyComponents.fulfilled, (state, action) => {
+            if (action.payload.status == 200) {
+                state.table_created.pending = false
+                state.front_message = "Table created successfully"
+                state.show_message = 1
+            }
+            else {
+                state.table_created.pending = false
+                state.front_message = action.payload.data.detail
+                state.show_message = 0
+            }
+        })
+
+        // Delete table
+        builder.addCase(TableService.deleteTable.pending, (state, action) => {
+            state.delete_table_pending = true
+        })
+        builder.addCase(TableService.deleteTable.fulfilled, (state, action) => {
+            if (action.payload.status == 200) {
+                state.delete_table_pending = false
+                state.front_message = action.payload.data.message
+                state.show_message = 1
+            }
+            else {
+                state.delete_table_pending = false
+                state.front_message = action.payload.data.message
+                state.show_message = 0
             }
         })
 
@@ -316,23 +352,6 @@ export const tableSlice = createSlice({
         })
 
 
-        // Delete table
-        builder.addCase(TableService.deleteTable.pending, (state, action) => {
-            state.delete_table_pending = true
-        })
-        builder.addCase(TableService.deleteTable.fulfilled, (state, action) => {
-            if (action.payload.status == 200) {
-                state.delete_table_pending = false
-                state.front_message = action.payload.data.message
-                state.show_message = 1
-            }
-            else {
-                state.delete_table_pending = false
-                state.front_message = action.payload.data.message
-                state.show_message = 0
-            }
-        })
-
 
         // Search Public Tables
         builder.addCase(TableService.searchPublicTables.pending, (state, action) => {
@@ -345,24 +364,6 @@ export const tableSlice = createSlice({
             }
             else {
                 state.public_table_pending = false
-            }
-        })
-
-
-        // Create table from ready components
-        builder.addCase(TableService.createTableFromReadyComponents.pending, (state, action) => {
-            state.table_created.pending = true
-        })
-        builder.addCase(TableService.createTableFromReadyComponents.fulfilled, (state, action) => {
-            if (action.payload.status == 200) {
-                state.table_created.pending = false
-                state.table_created.message = "Table created successfully"
-                state.show_message = 1
-            }
-            else {
-                state.table_created.pending = false
-                state.table_created.message = action.payload.data.detail
-                state.show_message = 0
             }
         })
 

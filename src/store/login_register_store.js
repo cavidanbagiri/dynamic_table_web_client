@@ -28,7 +28,6 @@ export const loginRegisterSlice = createSlice({
         },
 
         userLogout: (state) => {
-            console.log('l am work');
             state.is_auth = false;
             state.user = {
                 email: 'unknown',
@@ -51,9 +50,9 @@ export const loginRegisterSlice = createSlice({
         builder.addCase(UserService.userLogin.fulfilled, (state, action) => {
             state.login_pending = false;
             if (action.payload.status == 200) {
-                state.login_message = 'User logged in successfully';
                 state.user = action.payload.data.user;
                 state.is_auth = true;
+                state.login_message = 'User logged in successfully';
                 localStorage.setItem('token', action.payload.data.access_token);
                 localStorage.setItem('id', action.payload.data.user.id);
                 localStorage.setItem('username', action.payload.data.user.username);

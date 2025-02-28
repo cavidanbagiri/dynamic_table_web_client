@@ -35,7 +35,6 @@ function Navbar() {
                         </Link>
 
                         <div className='cursor-pointer' onClick={() => { 
-                            console.log('clicked');
                             dispatch(triggerShowMyTables())
                          }}>
                             <NavbarItemComponent iconName={'fa-folder'} iconSize={'text-2xl'} iconValue={'Folder'} />
