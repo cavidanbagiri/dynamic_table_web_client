@@ -51,13 +51,21 @@ export const loginRegisterSlice = createSlice({
             state.login_pending = false;
             if (action.payload.status == 200) {
                 state.user = action.payload.data.user;
+
+                // Capitalize the first letter of each word in fullname
+                const capitalizedFullname = action.payload.data.user.fullname
+               .split(' ')
+                .map(word => word.charAt   (0).toUpperCase() + word.slice(1))
+                .join(' ');
+
                 state.is_auth = true;
                 state.login_message = 'User logged in successfully';
                 localStorage.setItem('token', action.payload.data.access_token);
                 localStorage.setItem('id', action.payload.data.user.id);
                 localStorage.setItem('username', action.payload.data.user.username);
                 localStorage.setItem('email', action.payload.data.user.email);
-                localStorage.setItem('profile_image', action.payload.data.user.profileImage);
+                localStorage.setItem('profile_image', action.payload.data.user.profile_image);
+                localStorage.setItem('fullname', capitalizedFullname);
                 state.is_login_error = 1;
             }
             else {

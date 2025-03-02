@@ -25,6 +25,9 @@ const Register = () => {
     const login_message = useSelector((state) => state.loginRegisterSlice.login_message);
 
     
+    const [name, setname] = useState('');
+    const [middle_name, setMiddleName] = useState('');
+    const [surname, setSurname] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -40,6 +43,9 @@ const Register = () => {
             return;
         }
         const user_data = {
+            name: name,
+            middle_name: middle_name,
+            surname: surname,
             username: username,
             email: email,
             password: password,
@@ -76,9 +82,44 @@ const Register = () => {
 
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 className="text-3xl font-bold text-center mb-6">Register</h2>
-        
-        <div className="mb-4">
           
+        <div className="mb-4">
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            value={name}
+            onChange={(e) => setname(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-4">
+        <input
+            type="text"
+            id="middle_name"
+            placeholder="Enter your middle name"
+            className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            value={middle_name}
+            onChange={(e) => setMiddleName(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-4">
+        <input
+            type="text"
+            id="surname"
+            placeholder="Enter your surname"
+            className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-4">
           <input
             type="text"
             id="username"
