@@ -38,13 +38,13 @@ function Home() {
         <MessageBox message={front_message} color={"bg-red-500"} />
       ) : null}
 
+      {is_auth && <UserProfileComponent />}
       <AppInformationComponent />
 
       <div className=" flex flex-row items-start p-2 relative">
         <MyFolderComponent />
 
         <div className="flex flex-col">
-          {is_auth && <UserProfileComponent />}
 
           <PublicTablesComponent />
         </div>

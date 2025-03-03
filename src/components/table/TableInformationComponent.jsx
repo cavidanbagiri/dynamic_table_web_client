@@ -47,15 +47,22 @@ function TableInformationComponent() {
 
       {
         fetch_table.table_information.result_information.status == 1 &&
-        <MessageBox message={
-          'Affected rows: ' +
-          fetch_table.table_information.filter_information.total_rows +
-          ' | Execution time: ' +
-          fetch_table.table_information.filter_information.execution_time + 'ms'
-        } color={'bg-green-500'} />
+        <MessageBox
+          message={
+            fetch_table.table_information.filter_information.error_message
+              ? fetch_table.table_information.filter_information.error_message +
+              ' | Execution time: ' +
+              fetch_table.table_information.filter_information.execution_time + 'ms'
+              : 'Affected rows: ' +
+              fetch_table.table_information.filter_information.total_rows +
+              ' | Execution time: ' +
+              fetch_table.table_information.filter_information.execution_time + 'ms'
+          }
+          color={'bg-green-500'}
+        />
       }
 
-      
+
 
       <CodeEditor />
 

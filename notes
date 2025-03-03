@@ -3,11 +3,9 @@
 
 ************************ Front
 
-1 - Add Username and profile image to home page - Stopped - Short
+2 - Need to create a new table from code editor - Working ON - Long **************************
+    2.1 - After creating new table, need to refresh tables list and add this table for table definition and user tables section - Working ON - Short
 
-2 - Need to create a new table from code editor - Stopped - Long
-
-3 - Need to update table, add or delete new columns or rows - Stopped - Long
 
 
 
@@ -15,6 +13,10 @@
 ************************ Back
 
 1 - Need to close all of the functions from query where name is schema_information - Stopped - Short
+
+
+2 - When l try to insert data to backend, it's not working, because tablename values conncat with tablename below form - Stopped - Short
+insert into alekseyevskoe(fname, lname, position, salary) values('kazim-c', 'c', 'pl', '12')
 
 
 
@@ -27,7 +29,6 @@
 
 ************************ Design
 
-1 - Set my tables  and favorite tables also for table page, suggest same can use in both home and table page - Stopped - Short
 
 
 
@@ -39,5 +40,3 @@
 2 - If user not login, must can see all public tables and can be work with tables - Stopped
 
 3 - Enter the website with google login - Stopped
-
-4 - need to check, the sqlparse already has inside of requirements.txt in github - Stopped *******************************************

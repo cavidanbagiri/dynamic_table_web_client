@@ -7,7 +7,7 @@ function UserProfileComponent() {
   return (
     
 
-    <div className='flex flex-row h-30 items-center bg-gray-50 p-2 mx-3 mb-5'>
+    <div className='flex flex-row h-30 items-center bg-gray-50 p-2 mx-3 mt-2'>
       {
 
         localStorage.getItem('profile_image') !== "null" ?

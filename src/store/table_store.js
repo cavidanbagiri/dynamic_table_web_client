@@ -105,6 +105,7 @@ export const tableSlice = createSlice({
 
         setFilterSQLQueryResultStatusInitial: (state, action) => {
             state.fetch_table.table_information.result_information.status = -1;
+            state.fetch_table.table_information.filter_information.error_message = '';
         },
 
         searchMyTableAndFavoriteTable: (state, action) => {
@@ -317,7 +318,7 @@ export const tableSlice = createSlice({
             state.fetch_table.table_information.filter_information.pending = true
         })
         builder.addCase(TableService.filterTableByQuery.fulfilled, (state, action) => {
-            console.log(' object ', action.payload);
+            console.log('object : ', action.payload);
             if (action.payload.status == 200) {
                 state.fetch_table.table_information.filter_information.pending = false
                 state.fetch_table.table_info = action.payload?.data?.data;
@@ -326,7 +327,6 @@ export const tableSlice = createSlice({
                 state.fetch_table.table_information.filter_information.execution_time = action.payload?.data?.execution_time;
                 state.fetch_table.table_information.filter_information.error_status = 1
                 state.fetch_table.table_information.result_information.status = 1
-                
                 state.fetch_table.headers = [];
                 if (!state.fetch_table.headers) {
                     state.fetch_table.headers = [];
@@ -342,13 +342,23 @@ export const tableSlice = createSlice({
                     }
                 }
             }
+
+            else if (action.payload.status == 201) {
+                state.fetch_table.table_information.filter_information.pending = false
+                state.fetch_table.table_information.filter_information.total_rows = action.payload?.data?.affected_rows;
+                state.fetch_table.table_information.filter_information.execution_time = action.payload?.data?.execution_time;
+                state.fetch_table.table_information.filter_information.error_status = 1
+                state.fetch_table.table_information.filter_information.error_message = action.payload?.data?.message
+                state.fetch_table.table_information.result_information.status = 1
+            }
+
             else {
-                console.log('enter here');
                 state.fetch_table.table_information.filter_information.pending = false;
                 state.fetch_table.table_information.filter_information.error_message = action.payload.data.detail;
                 state.fetch_table.table_information.filter_information.error_status = 0
                 state.fetch_table.table_information.result_information.status = 0
             }
+
         })
 
 

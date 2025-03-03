@@ -13,7 +13,7 @@ function MyFolderComponent() {
         <AnimatePresence>
             {show_my_tables && (
                 <motion.div
-                    className='flex flex-col h-screen border rounded-md bg-black bg-opacity-50 w-screen fixed top-0 left-0 z-10'
+                    className='flex flex-col h-screen border rounded-md bg-black bg-opacity-50 w-screen fixed top-0 z-10'
                     initial={{ opacity: 0 }} // Initial state
                     animate={{ opacity: 1 }} // Animate to this state
                     exit={{ opacity: 0 }} // Animate when component is removed
