@@ -1,0 +1,18 @@
+@keyframes slideInFromTop {
+    from {
+      transform: translateY(-50px); /* Start above the visible area */
+      opacity: 0; /* Fade in effect */
+    }
+    to {
+      transform: translateY(0); /* Move to the final position */
+      opacity: 1; /* Fully visible */
+    }
+  }
+  
+  .slide-in {
+    animation: slideInFromTop 1s ease-out forwards; /* Duration, easing, and behavior */
+  }
+  
+  .hidden {
+    display: none; /* Hide the text initially */
+  }
