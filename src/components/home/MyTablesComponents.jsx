@@ -44,7 +44,7 @@ function MyTablesComponents() {
 
             {
               my_tables_filter.length > 0 ?
-                <div className='flex flex-col w-full  '>
+                <div className='flex flex-col w-full'>
 
                   {
                     my_tables_filter.map((table, index) => {

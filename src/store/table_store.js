@@ -237,10 +237,16 @@ export const tableSlice = createSlice({
             state.delete_table_pending = true
         })
         builder.addCase(TableService.deleteTable.fulfilled, (state, action) => {
+
             if (action.payload.status == 200) {
                 state.delete_table_pending = false
                 state.front_message = action.payload.data.message
                 state.show_message = 1
+
+                state.my_tables_filter = state.my_tables_filter.filter((table) => {
+                    return table.id !== action.payload.data.table_id
+                });
+                state.my_tables = state.my_tables.filter((table) => table.id !== action.payload.data.table_id);
             }
             else {
                 state.delete_table_pending = false
@@ -318,7 +324,6 @@ export const tableSlice = createSlice({
             state.fetch_table.table_information.filter_information.pending = true
         })
         builder.addCase(TableService.filterTableByQuery.fulfilled, (state, action) => {
-            console.log('object : ', action.payload);
             if (action.payload.status == 200) {
                 state.fetch_table.table_information.filter_information.pending = false
                 state.fetch_table.table_info = action.payload?.data?.data;
@@ -354,7 +359,7 @@ export const tableSlice = createSlice({
 
             else {
                 state.fetch_table.table_information.filter_information.pending = false;
-                state.fetch_table.table_information.filter_information.error_message = action.payload.data.detail;
+                state.fetch_table.table_information.filter_information.error_message = action.payload?.data?.message;
                 state.fetch_table.table_information.filter_information.error_status = 0
                 state.fetch_table.table_information.result_information.status = 0
             }

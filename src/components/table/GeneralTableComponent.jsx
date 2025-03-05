@@ -32,13 +32,50 @@ function GeneralTableComponent() {
         }
     }, [fetch_table]);
 
+
+    useEffect(() => {
+        if (fetch_table.table_information.filter_information.error_status == 0) {
+            setTimeout(() => {
+                dispatch(setFilterSQLQueryStatusInitial());
+            }, 6000)
+        }
+    }, [fetch_table]);
+
+    useEffect(() => {
+        if (fetch_table.table_information.result_information.status == 1) {
+            setTimeout(() => {
+                dispatch(setFilterSQLQueryResultStatusInitial());
+            }, 6000)
+        }
+    }, [fetch_table]);
+
+
     return (
         <div className='flex flex-col'>
+
 
             {
                 fetch_table.table_information.filter_information.error_status == 0 &&
                 <MessageBox message={fetch_table.table_information.filter_information.error_message} color={'bg-red-500'} />
             }
+
+            {
+                fetch_table.table_information.result_information.status == 1 &&
+                <MessageBox
+                    message={
+                        fetch_table.table_information.filter_information.error_message
+                            ? fetch_table.table_information.filter_information.error_message +
+                            ' | Execution time: ' +
+                            fetch_table.table_information.filter_information.execution_time + 'ms'
+                            : 'Affected rows: ' +
+                            fetch_table.table_information.filter_information.total_rows +
+                            ' | Execution time: ' +
+                            fetch_table.table_information.filter_information.execution_time + 'ms'
+                    }
+                    color={'bg-green-500'}
+                />
+            }
+
 
 
             <div className='flex flex-row h-96 '>
