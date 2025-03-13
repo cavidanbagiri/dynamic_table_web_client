@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 
-import { setLoginErrorInitial } from '../store/login_register_store';
+import { setRegisterErrorInitial } from '../store/login_register_store';
 
 import UserService from '../service/UserService';
 
@@ -21,8 +21,8 @@ const Register = () => {
 
     const navigate = useNavigate();
 
-    const is_login_error = useSelector((state) => state.loginRegisterSlice.is_login_error);
-    const login_message = useSelector((state) => state.loginRegisterSlice.login_message);
+    const is_registration_error = useSelector((state) => state.loginRegisterSlice.is_registration_error);
+    const registration_message = useSelector((state) => state.loginRegisterSlice.registration_message);
 
     
     const [name, setname] = useState('');
@@ -42,6 +42,10 @@ const Register = () => {
             alert('Password must be at least 8 characters long');
             return;
         }
+        if (!username || !email || !password) {
+            alert('All fields are required');
+            return;
+        }
         const user_data = {
             name: name,
             middle_name: middle_name,
@@ -50,34 +54,35 @@ const Register = () => {
             email: email,
             password: password,
         };
+
         dispatch(UserService.userRegister(user_data));
     }
 
 
     useEffect(() => {
-        if (is_login_error === 0) {
+        if (is_registration_error === 0) {
             setTimeout(() => {
-                dispatch(setLoginErrorInitial());
+                dispatch(setRegisterErrorInitial());
             }, 1500)
         }
-        else if (is_login_error === 1) {
+        else if (is_registration_error === 1) {
             setTimeout(() => {
                 navigate('/login');
-                dispatch(setLoginErrorInitial());
+                dispatch(setRegisterErrorInitial());
             }, 600)
         }
-    }, [is_login_error])
+    }, [is_registration_error])
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
 
             {
-                is_login_error == 0 &&
-                <MessageBox color={'bg-red-500'} message={login_message} />
+                is_registration_error == 0 &&
+                <MessageBox color={'bg-red-500'} message={registration_message} />
             }
             {
-                is_login_error == 1 &&
-                <MessageBox color={'bg-green-500'} message={login_message} />
+                is_registration_error == 1 &&
+                <MessageBox color={'bg-green-500'} message={registration_message} />
             }
 
       <div className="bg-white p-8 rounded-lg shadow-md w-96">

@@ -21,6 +21,7 @@ function PublicTablesComponent() {
     useEffect(() => {
         const user_id = localStorage.getItem('id');
         dispatch(TableService.getPublicTables(user_id));
+        dispatch(TableService.fetchMyTables());
     }, []);
 
     return (

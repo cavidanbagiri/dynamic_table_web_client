@@ -29,6 +29,10 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     async function login() {
+        if (!email || !password) {
+            alert('All fields are required');
+            return;
+        }
         const user_data = {
             email: email,
             password: password,

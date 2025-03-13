@@ -17,7 +17,7 @@ function UserProfileComponent() {
             <div className='ml-3'>
               <p className='font-bold text-2xl'>
                 {
-                  localStorage.getItem('fullname') 
+                  localStorage.getItem('username') 
                 }
               </p>
             </div>
@@ -29,7 +29,7 @@ function UserProfileComponent() {
             <div className='ml-3'>
               <p className='font-bold text-2xl'>
                 {
-                  localStorage.getItem('fullname')
+                  localStorage.getItem('username')
                 }
               </p>
             </div>

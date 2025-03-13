@@ -4,6 +4,9 @@
 ************************ Front
 
 
+1 - The problem is after logout, refresj token doesnt delete from cookies - Stopped - Long
+
+
 
 
 ************************ Back

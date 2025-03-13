@@ -11,6 +11,7 @@ import { userLogout } from '../store/login_register_store';
 import { triggerShowMyTables } from '../store/common_store';
 
 import NavbarItemComponent from '../components/navbar/navbar_item_component'
+import UserService from '../service/UserService';
 
 
 function Navbar() {
@@ -55,9 +56,11 @@ function Navbar() {
                         }
                         {
                             is_auth === true &&
-                            <div onClick={() => { 
+                            <div onClick={async () => { 
                                 const userResponse = confirm("Do you want to proceed?");
-                                if (userResponse) {dispatch(userLogout());}
+                                if (userResponse) {
+                                    dispatch(UserService.userLogout());
+                                }
                             }} >
                                 
                                 <NavbarItemComponent iconName={'fa-circle-user'} iconSize={'text-2xl'} iconValue={'Logout'} />

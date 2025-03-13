@@ -12,6 +12,7 @@ import PublicTablesComponent from "../components/home/PublicTablesComponent";
 import MyFolderComponent from "../components/common/MyFolderComponent";
 import MessageBox from "../components/common/MessageBox";
 import AppInformationComponent from "../components/home/AppInformationComponent";
+// import RefreshTokenButton from "../components/home/RefreshTokenButton";
 
 function Home() {
   const dispatch = useDispatch();
@@ -32,16 +33,17 @@ function Home() {
 
   return (
     <div className="flex flex-col">
+      
       {show_message === 1 ? (
         <MessageBox message={front_message} color={"bg-green-500"} />
       ) : show_message === 0 ? (
         <MessageBox message={front_message} color={"bg-red-500"} />
       ) : null}
 
-      {is_auth && <UserProfileComponent />}
+      {/* {is_auth && <UserProfileComponent />} */}
       <AppInformationComponent />
 
-      <div className=" flex flex-row items-start p-2 relative">
+      <div className=" flex flex-row items-start p-2 relative ">
         <MyFolderComponent />
 
         <div className="flex flex-col">
