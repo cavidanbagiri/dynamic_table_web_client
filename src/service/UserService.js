@@ -12,6 +12,7 @@ class UserService {
         'user/register',
         async (user_data, { rejectWithValue }) => {
             try {
+                console.log('resended data to server', user_data);
                 const response = await $api.post('/user/register', user_data);
                 return response.data; // Return only the data you need
             } catch (err) {
@@ -42,6 +43,7 @@ class UserService {
         'user/refreshtoken',
         async (_, { rejectWithValue }) => {
             try {
+                console.log('refresh token work');
                 const response = await $api.post('/user/refreshtoken');
                 return response.data; // Return only the data you need
             } catch (err) {

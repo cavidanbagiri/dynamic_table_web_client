@@ -118,7 +118,6 @@ export const loginRegisterSlice = createSlice({
 
         // Handle rejected state
         builder.addCase(UserService.userLogin.rejected, (state, action) => {
-            console.log('some in here');
             state.is_auth = false;
             state.login_pending = false;
             state.login_message = action.payload?.message || 'Login failed';

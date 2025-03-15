@@ -36,11 +36,6 @@ function App() {
             const expirationTime = decodedToken.exp * 1000; // Convert to milliseconds
             const currentTime = Date.now();
 
-            console.log('Token expiry check:', {
-                expirationTime,
-                currentTime,
-                timeRemaining: expirationTime - currentTime,
-            });
 
             // Check if the token is about to expire (within 285 seconds)
             if (expirationTime - currentTime < 10000) {
@@ -48,7 +43,6 @@ function App() {
                 dispatch(UserService.refresh())
                     .then((result) => {
                         if (UserService.refresh.fulfilled.match(result)) {
-                            console.log('Token refreshed successfully:', result.payload);
                             dispatch(setIsAuthTrue()); // Update authentication state
                         } else {
                             console.error('Failed to refresh token:', result.payload);
@@ -62,7 +56,6 @@ function App() {
                 dispatch(setIsAuthTrue());
             }
         } catch (error) {
-            console.error('Error decoding token:', error);
             // Handle invalid tokens (e.g., clear localStorage and redirect to login)
             localStorage.removeItem('token');
         }
@@ -70,22 +63,6 @@ function App() {
 }, [dispatch]); // Add dispatch as a dep
 
 
-
-  // useEffect(()=>{
-  //   if(is_auth === false){
-
-  //       dispatch(UserService.refresh());
-
-  //   }
-  //   else{
-  //     dispatch(TableService.fetchFavoriteTables());
-  //     dispatch(TableService.fetchMyTables());
-  //   }
-  // },
-  // [is_auth]
-  // );
-
-  
 
   return (
     <>
